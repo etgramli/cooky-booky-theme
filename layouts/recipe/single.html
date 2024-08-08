@@ -1,0 +1,54 @@
+{{ define "main" }}
+<div class="recipe justify-content-md-center">
+  <picture class="order-md-0 p-0">
+    {{ $image := .Resources.GetMatch (printf "%s%s" .Params.bigImageName ".jpg") }}
+    {{- $imageHuge := $image.Fill (.Params.bigImageOrientation | printf "%s %s" "1600x900 webp" | printf "%s") -}}
+    {{- $imageTiny := $image.Fill (.Params.bigImageOrientation | printf "%s %s" "960x540 webp" | printf "%s") -}}
+    <source media="(min-width: 1281px)" width="{{ $imageHuge.Width }}" height="{{ $imageHuge.Height }}" srcset="{{ $imageHuge.RelPermalink }}">
+    <source width="{{ $imageTiny.Width }}" height="{{ $imageTiny.Height }}" srcset="{{ $imageTiny.RelPermalink }}">
+    <img class="image img-fluid" width="{{ $imageTiny.Width }}" height="{{ $imageTiny.Height }}" src="{{ $imageTiny.RelPermalink }}" alt="Bild von {{.Title}}" />
+  </picture>
+  <div id="textcontent" class="order-md-1">
+    <h1 class="recipeTitle">{{ .Title }}</h1>
+    <div class="info">
+      {{- if isset .Params "preparationtime" }}
+      <div class="infoDesc">
+        <div class="symbol">&#x23F1;</div>
+        <div class="infoDesc">{{ .Params.preparationTime }}</div>
+      </div>
+      {{- end }}
+      {{ if or (isset .Params "bakingtime") (isset .Params "bakingtemperature") }}
+      <div class="infoDesc">
+        <div class="symbol">&#x1F525;</div>
+        <div class="infoDesc">
+          {{- if isset .Params "bakingtime" -}}
+          <div class="inlineDiv">{{ .Params.bakingTime }}</div>
+          {{- end -}}
+          {{- if isset .Params "bakingtemperature" -}}
+          <div class="inlineDiv">{{ if isset .Params "bakingtime" }}, {{ end }}</div>{{ .Params.bakingTemperature }}°C
+          {{- end -}}
+        </div>
+      </div>
+      {{- end }}
+      {{- if isset .Params "portionsize" -}}
+      <div class="infoDesc">
+        <div class="symbol">&#x1F37D;</div>
+        <div class="infoDesc">{{ .Params.portionSize }}</div>
+      </div>
+      {{- end }}
+      <div class="infoDesc">
+        <div class="symbol">&#x1F4D6;</div>
+        <div class="infoDesc">{{ .Params.author }}</div>
+      </div>
+    </div>
+    <div class="row justify-content-md-center">
+    {{ .Content }}
+    </div>
+  </div>
+  {{- $pdf := .Resources.GetMatch "*.pdf" }}
+  {{ if $pdf -}}
+  <button class="rounded-circle downloadButton" id="downloadButton" aria-label="Download current recipe as PDF" onclick="window.open('{{$pdf.RelPermalink}}');">
+    <i class="actionButtonIcon bi-file-earmark-arrow-down"></i>
+  </button>
+  {{- end -}}
+{{- end -}}

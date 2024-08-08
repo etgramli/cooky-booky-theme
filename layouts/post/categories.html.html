@@ -1,0 +1,10 @@
+{{ define "main" }}
+<div class="categoriesList">
+  <h1>Kategorien</h1>
+  <ul class="categoriesLinks">
+  {{ range (sort (where .Site.Pages "Type" "categorypage") ".Params.categoryIndex") }}
+    <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+  {{ end }}
+  </ul>
+</div>
+{{ end }}

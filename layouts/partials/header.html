@@ -1,0 +1,38 @@
+<nav class="navbar navigation sticky-top navbar-expand-md">
+    <div class="container-fluid">
+      <button class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="{{ .Site.BaseURL }}">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/alphabetic">Alphabetisch</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/category">Kategorien</a>
+          </li>
+        </ul>
+      </div>
+      <div class="form-check form-switch" id="switch-keep-on-container">
+        <input class="form-check-input" type="checkbox" role="switch" id="switch-keep-on">
+        <label class="form-check-label" for="switch-keep-on">An bleiben</label>
+      </div>
+      <script src="/js/wakelock.js" defer></script>
+      <form class="navbar-form navbar-right d-flex">
+        <div class="form-group">
+          <input id="searchInput" class="form-control me-2" type="search" placeholder="Suchtext" aria-label="Suche">
+          <ul id="searchResults" class="list-group"></ul>
+        </div>
+      </form>
+    </div>
+  </nav>
+  

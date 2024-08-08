@@ -1,0 +1,35 @@
+{
+    "lang": "de",
+    "short_name": "Cooky Booky",
+    "name": "Cooky Booky",
+    "description": "Mein tolles Cooky Booky mit leckeren Rezepten zum Nachkochen",
+    "icons": [
+      {
+        "src": "/favicon-192.png",
+        "type": "image/png",
+        "sizes": "192x192"
+      },
+      {
+        "src": "/maskable_favicon-192.png",
+        "type": "image/png",
+        "sizes": "192x192",
+        "purpose": "maskable"
+      },
+      {
+        "src": "/favicon-512.png",
+        "type": "image/png",
+        "sizes": "512x512"
+      },
+      {
+        "src": "/maskable_favicon-512.png",
+        "type": "image/png",
+        "sizes": "512x512",
+        "purpose": "maskable"
+      }
+    ],
+    "start_url": "/?utm_source=pwa",
+    "scope": "/",
+    "background_color": "#ffffff",
+    "theme_color": "#ffffff",
+    "display": "standalone"
+}

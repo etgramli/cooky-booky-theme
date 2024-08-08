@@ -1,0 +1,25 @@
+<footer class="footer fixed-bottom">
+    <button class="rounded-circle randomRecipeButton" id="randomRecipeButton" aria-label="Go to a random recipe">
+        <i class="actionButtonIcon"></i>
+    </button>
+    {{ partialCached "randomRecipeButtonScript.html" . }}
+    <button class="rounded-circle shareButton" id="shareButton" aria-label="Share the current page">
+        <i class="actionButtonIcon bi-share"></i>
+    </button>
+    <script type="text/javascript">
+        const shareData = {
+            title: "{{ .Title }}",
+            text: "Schau dir {{ .Title }} an auf Cooky-Booky.de!",
+            url: "{{ .RelPermalink }}"
+        };
+        document.getElementById("shareButton").addEventListener("click", async () => {
+            try {
+                await navigator.share(shareData);
+            } catch (err) {
+                console.log(err);
+            }
+        });
+    </script>
+    <script src="/js/fuse.js"></script>
+    <script src="/js/search.js"></script>
+</footer>

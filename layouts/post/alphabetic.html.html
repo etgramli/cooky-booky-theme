@@ -1,0 +1,46 @@
+{{ define "main" }}
+<div class="alphabeticalList">
+  <h2>Alphabetisch</h2>
+  <div id="letters">
+    {{- $data := newScratch -}}
+    {{- $data.Set "oldletter" "" -}}
+    {{- range (sort (where .Site.RegularPages "Type" "recipe") ".Params.id") -}}
+      {{- $data.Set "startletter" (substr .Title 0 1) -}}
+      {{- if ne ($data.Get "startletter") ($data.Get "oldletter") -}}
+        <a href="#{{ $data.Get "startletter" }}">{{ $data.Get "startletter" }}</a>
+        {{ $data.Set "oldletter" ($data.Get "startletter") }}
+      {{- end -}}
+    {{- end -}}
+  </div>
+  <div class="list">
+  {{- $data := newScratch -}}
+  {{- $data.Set "oldletter" "" -}}
+  {{- range (sort (where .Site.RegularPages "Type" "recipe") ".Params.id") -}}
+    {{ $data.Set "startletter" (substr .Title 0 1) }}
+    {{ if ne ($data.Get "startletter") ($data.Get "oldletter") }}
+      <h3 id="{{ $data.Get "startletter" }}">{{ $data.Get "startletter" }}</h3>
+      {{ $data.Set "oldletter" ($data.Get "startletter") }}
+    {{- end -}}
+    <div class="rlink"><a href="{{ .RelPermalink }}">{{ .Title }}</a></div>
+  {{- end -}}
+  </div>
+  <button class="rounded-circle" onclick="scrollToTop()" id="toTopButton" title="Go to top">
+    <i class="bi bi-caret-up-fill"></i>
+  </button>
+  <script type="text/javascript">
+    let mybutton = document.getElementById("toTopButton");
+    window.onscroll = function() {toggleToTopButton()};
+    function toggleToTopButton() {
+      if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        mybutton.style.display = "block";
+      } else {
+        mybutton.style.display = "none";
+      }
+    }
+    function scrollToTop() {
+      document.body.scrollTop = 0; // Safari
+      document.documentElement.scrollTop = 0; // other browsers
+    }
+  </script>
+</div>
+{{ end }}

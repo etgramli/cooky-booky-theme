@@ -1,0 +1,61 @@
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ .Title }} | Cooky Booky</title>
+    <meta property="og:title" content="{{ .Title }} | Cooky Booky" />
+    <meta property="og:site_name" content="{{ .Title }} | Cooky Booky" />
+    <meta property="og:url" content="{{ .Permalink }}" />
+    <meta property="og:type" content="website" />
+
+    {{- if eq .Params.type "recipe" }}<!-- Tags and open graph image for recipes -->
+    <meta name="description" content="Das Rezept für {{ .Title }} auf cooky-booky.de" />
+    <meta property="og:description" content="Das Rezept für {{ .Title }} auf cooky-booky.de" />
+
+    {{- if isset .Params "keywords" }}
+    <meta name="keywords" content="Rezept, selbst kochen, lecker, {{ delimit .Keywords ", " }}"/>
+    {{- end }}
+
+    {{- $imageName := printf "%s%s" .Params.bigImageName ".jpg"}}
+    {{- $image := .Resources.GetMatch $imageName }}
+    {{- $openGraphImage := $image.Fill (.Params.bigImageOrientation | printf "%s %s" "600x315 webp q60" | printf "%s") }}
+    <meta property="og:image" content="{{ $openGraphImage.Permalink }}" />
+    <meta property="og:image:type" content="image/webp" />
+    <meta property="og:image:width" content="600" />
+    <meta property="og:image:height" content="315" />
+
+    {{- else -}}<!-- and the logo and tags on any other page -->
+
+    <meta name="description" content="{{ .Title }}" />
+    <meta property="og:description" content="{{ .Title }}" />
+    <meta property="og:image" content="{{ .Site.BaseURL }}/img/default-og-image.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="256" />
+    <meta property="og:image:height" content="256" />
+    {{ end -}}
+
+    <link rel='shortcut icon' type='image/svg' href='/img/CookyBookyLogoV1_Plate.svg' />
+
+    {{- $options := (dict "targetPath" "css/styles.css" "outputStyle" "compressed") }}
+    {{ $style := resources.Get "sass/main.scss" | toCSS  $options | minify -}}
+    <link rel="stylesheet" href="{{ $style.RelPermalink }}" media="screen">
+    
+    {{- $bootstrap := resources.Get "js/bootstrap.bundle.min.js" }}
+    {{ $js := slice $bootstrap | resources.Concat "js/bundle.js" | resources.Minify -}}
+    <script src="{{$js.RelPermalink}}" defer></script>
+    <link rel="sitemap" type="application/xml" title="sitemap" href="/sitemap.xml">
+
+    <!-- PWA thingies -->
+    <link rel="manifest" href="/manifest.webmanifest">
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="Cooky Booky" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    {{ with resources.Get "sw-template.js" }}
+        {{ with resources.ExecuteAsTemplate "sw.js" $ . }}
+        <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('{{ .RelPermalink }}');
+        };
+        </script>
+        {{ end }}
+    {{ end }}
+</head>
