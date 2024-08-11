@@ -15,8 +15,8 @@ AddOutputFilterByType DEFLATE application/x-javascript
 AddOutputFilterByType DEFLATE application/xml+rss
 </IfModule>
 <IfModule mod_headers.c>
-# 1 week
-<FilesMatch "\.(ico|webp|svg|woff|woff2|css|js)$">
+# 1 year
+<FilesMatch "\.(ico|png|webp|svg|woff|woff2|css|js)$">
 Header set Cache-Control "public, max-age=31536000, no-transform"
 </FilesMatch>
 </IfModule> 
