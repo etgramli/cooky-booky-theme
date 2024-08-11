@@ -2,9 +2,11 @@
 <div class="recipe justify-content-md-center">
   <picture class="order-md-0 p-0">
     {{ $image := .Resources.GetMatch (printf "%s%s" .Params.bigImageName ".jpg") }}
-    {{- $imageHuge := $image.Fill (.Params.bigImageOrientation | printf "%s %s" "1600x900 webp" | printf "%s") -}}
-    {{- $imageTiny := $image.Fill (.Params.bigImageOrientation | printf "%s %s" "960x540 webp" | printf "%s") -}}
-    <source media="(min-width: 1281px)" width="{{ $imageHuge.Width }}" height="{{ $imageHuge.Height }}" srcset="{{ $imageHuge.RelPermalink }}">
+    {{- $imageHuge := $image.Fill (.Params.bigImageOrientation | printf "%s %s" "1280x720 webp" | printf "%s") -}}
+    {{- $imageMedi := $image.Fill (.Params.bigImageOrientation | printf "%s %s" "768x432 webp" | printf "%s") -}}
+    {{- $imageTiny := $image.Fill (.Params.bigImageOrientation | printf "%s %s" "430x242 webp" | printf "%s") -}}
+    <source media="(min-width: {{$imageHuge.Width}}px)" width="{{ $imageHuge.Width }}" height="{{ $imageHuge.Height }}" srcset="{{ $imageHuge.RelPermalink }}">
+    <source media="(min-width: {{$imageMedi.Width}}px)" width="{{ $imageMedi.Width }}" height="{{ $imageMedi.Height }}" srcset="{{ $imageMedi.RelPermalink }}">
     <source width="{{ $imageTiny.Width }}" height="{{ $imageTiny.Height }}" srcset="{{ $imageTiny.RelPermalink }}">
     <img class="image img-fluid" width="{{ $imageTiny.Width }}" height="{{ $imageTiny.Height }}" src="{{ $imageTiny.RelPermalink }}" alt="Bild von {{.Title}}" />
   </picture>
