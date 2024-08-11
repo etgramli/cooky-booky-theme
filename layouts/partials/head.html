@@ -34,6 +34,7 @@
     {{ end -}}
 
     <link rel='shortcut icon' type='image/svg' href='/img/CookyBookyLogoV1_Plate.svg' />
+    <link rel='apple-touch-icon' href='apple-touch-icon.png' />
 
     {{- $options := (dict "targetPath" "css/styles.css" "outputStyle" "compressed") }}
     {{ $style := resources.Get "sass/main.scss" | toCSS  $options | minify -}}
