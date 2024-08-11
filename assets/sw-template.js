@@ -10,7 +10,7 @@ function precache() {
       "/index.html",
       "/index.json",
       "/404.html",
-      "/CookyBookyLogoV1_Plate.svg",
+      "/img/CookyBookyLogoV1_Plate.svg",
       "/alphabetic/index.html",
       "/category/index.html",
       "/cs/style.min.css",
