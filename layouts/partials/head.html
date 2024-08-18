@@ -1,15 +1,18 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ .Title }} | Cooky Booky</title>
-    <meta property="og:title" content="{{ .Title }} | Cooky Booky" />
-    <meta property="og:site_name" content="{{ .Title }} | Cooky Booky" />
+    <meta property="og:site_name" content="{{ .Site.Title }}" />
+    <meta property="og:locale" content="{{ .Site.LanguageCode }}" />
     <meta property="og:url" content="{{ .Permalink }}" />
     <meta property="og:type" content="website" />
 
     {{- if eq .Params.type "recipe" }}<!-- Tags and open graph image for recipes -->
-    <meta name="description" content="Das Rezept für {{ .Title }} auf cooky-booky.de" />
-    <meta property="og:description" content="Das Rezept für {{ .Title }} auf cooky-booky.de" />
+    {{- $title := printf "%s | %s | Rezept | %s" .Title .Params.category .Site.Title }}
+    {{ $description := printf "Mit diesem Rezept lernst du wie du %s selber zubereiten kannst. Schaue hier bei %s vorbei und koche das Rezept einfach nach!" .Title .Site.Title -}}
+    <title>{{ $title }}</title>
+    <meta property="og:title" content="{{ $title }}" />
+    <meta name="description" content="{{ $description }}" />
+    <meta property="og:description" content="{{ $description }}" />
 
     {{- if isset .Params "keywords" }}
     <meta name="keywords" content="Rezept, selbst kochen, lecker, {{ delimit .Keywords ", " }}"/>
@@ -25,8 +28,12 @@
 
     {{- else -}}<!-- and the logo and tags on any other page -->
 
-    <meta name="description" content="{{ .Title }}" />
-    <meta property="og:description" content="{{ .Title }}" />
+    <title>{{ .Title }} | {{ .Site.Title }}</title>
+    <meta property="og:title" content="{{ .Title }} | {{ .Site.Title }}" />
+    {{- $numberOfRecipesFloor := math.Mul (math.Div (math.Sub (where .Site.RegularPages "Type" "recipe" | len) 1) 10) 10 }}
+    {{ $description := printf "Entdecke mehr als %d einfache und köstliche Rezepte bei %s. Finde hier das nächste Rezept zum nachkochen!" $numberOfRecipesFloor .Site.Title -}}
+    <meta name="description" content="{{ $description }}" />
+    <meta property="og:description" content="{{ $description }}" />
     <meta property="og:image" content="{{ .Site.BaseURL }}/img/default-og-image.png" />
     <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="256" />
