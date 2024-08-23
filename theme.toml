@@ -6,9 +6,9 @@ license = "GPL"
 licenselink = "https://github.com/etgramli/cooky-booky-theme/blob/master/LICENSE"
 description = "Minimal theme for my cooking website."
 homepage = "https://github.com/etgramli/"
-tags = []
+tags = ["responsive", "cooking", "recipes"]
 features = []
-min_version = "0.41.0"
+min_version = "0.119.0"
 
 [author]
   name = "Etienne Gramlich"
