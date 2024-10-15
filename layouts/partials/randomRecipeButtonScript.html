@@ -2,9 +2,10 @@
     let diceclasses = Array('bi-dice-1', 'bi-dice-2', 'bi-dice-3', 'bi-dice-4', 'bi-dice-5', 'bi-dice-6');
     let diceclass = diceclasses[Math.floor(Math.random()*diceclasses.length)];
     document.getElementById("randomRecipeButton").classList.add(diceclass);
-    {{ if gt (len (where .Site.RegularPages "Type" "recipe")) 0 }}
+    {{ $recipes := shuffle (where .Site.RegularPages "Type" "recipe") }}
+    {{ if gt (len $recipes) 0 }}
     let links = [
-    {{- range shuffle (where .Site.RegularPages "Type" "recipe") -}}
+    {{- range $recipes -}}
     {{- .RelPermalink -}},
     {{- end -}}
     ""];
