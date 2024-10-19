@@ -51,7 +51,7 @@
     <link rel='/apple-touch-icon' href='apple-touch-icon.png' />
 
     {{- $options := (dict "targetPath" "css/styles.css" "outputStyle" "compressed") }}
-    {{ $style := resources.Get "sass/main.scss" | toCSS  $options | minify -}}
+    {{ $style := resources.Get "sass/main.scss" | toCSS  $options | postCSS | minify | fingerprint | resources.PostProcess -}}
     <link rel="stylesheet" href="{{ $style.RelPermalink }}" media="screen">
     
     {{- $bootstrap := resources.Get "js/bootstrap.bundle.min.js" }}
