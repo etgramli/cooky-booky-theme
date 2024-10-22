@@ -1,8 +1,13 @@
 {{ define "main" }}
 <div class="mainContainer">
-  <h1 id="welcome">Willkommen bei Cooky Booky!</h1>
-  <img id="logo" src="/img/CookyBookyLogoV1_Plate.svg" alt="Logo" width="256" height="256"
-       onclick="if(Math.floor(Math.random()*1000) % 2 == 0){this.src='/img/CookyBookyLogoV1_Plate_Gsicht.svg'} else {this.src='/img/CookyBookyLogoV1_QR.svg'}"/>
+  <h1 id="welcome">Cooky Booky</h1>
+  <div class="intro-text">
+    <div>
+      <p>Willkommen bei Cooky Booky! Entdecke hier köstliche und einfache Rezepte zum Nachkochen. Mit den Bildern und Schritten ist das ein Kinderspiel!</p>
+      <p>Falls du schon eine Idee hast, schaue in der alphabetischen Liste, den Kategorien oder in der Suchleiste nach, ob du das Gericht hier findest.</p>
+      <p>Wenn du nach Inspirationen suchst, finde zufällige Rezepte mit dem Button unten rechts.</p>
+    </div>
+  </div>
   <h2>Links</h2>
   <ul class="list-unstyled links">
     <li><a href="/alphabetic"><i class="bi bi-book"></i> Alphabetisch</a></li>
