@@ -16,5 +16,33 @@
     <li><a href="/category"><i class="bi bi-columns-gap"></i> Kategorien</a></li>
     <li><a href="/index.xml"><i class="bi bi-rss"></i> RSS</a></li>
   </ul>
+  <script type="text/javascript">
+    {{ $recipes := shuffle (where .Site.RegularPages "Type" "recipe") }}
+    {{ if gt (len $recipes) 0 }}
+    let titles = [
+    {{- range $recipes -}}
+    {{- .Title -}},
+    {{- end -}}
+    ""];
+    let references = [
+    {{- range $recipes -}}
+    {{- .RelPermalink -}},
+    {{- end -}}
+    ""];
+    const hoursInADay = 24 * 60 * 60 * 1000; // 86400000
+    let daysSinceBeginOfTime = Math.floor(new Date().getTime() / hoursInADay);
+    let idx = daysSinceBeginOfTime % (titles.length - 1);
+    document.getElementById("rdt").innerHTML = titles[idx];
+    document.getElementById("rdt").href = references[idx];
+    {{ else }}
+    document.getElementById("rdt").innerHTML = "Kein Rezept!";
+    document.getElementById("rdt").href = "/";
+    {{ end }}
+
+    let frag = window.location.hash.substring(1).toLowerCase() + "/";
+    if (references.includes(frag)) {
+      window.location.replace(frag);
+    }
+  </script>
 </div>
 {{ end }}
