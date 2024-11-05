@@ -42,6 +42,8 @@
     let frag = window.location.hash.substring(1).toLowerCase() + "/";
     if (references.includes(frag)) {
       window.location.replace(frag);
+    } else if (references.includes(frag.replace("n", "m"))) {
+      window.location.replace(frag.replace("n", "m"));
     }
   </script>
 </div>
