@@ -31,7 +31,7 @@
       <link>{{ .Permalink }}</link>
       <pubDate>{{ .Date.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</pubDate>
       <guid isPermaLink="true">{{ .Permalink }}</guid>
-      <description>Schaue dir das {{ if .Params.changedDate }}{{ if .Params.publishDate }}{{ if gt (time.AsTime .Params.changedDate) .Params.publishDate }} aktualisierte {{ else }} neue {{ end }}{{ end }}{{ end }} Rezept {{ .Title }} an auf &lt;a href="{{ .Permalink }}">{{ .Site.Title }}&lt;/a></description>
+      <description>Schaue dir das {{ if .Params.changedDate }}{{ if .Params.publishDate }}{{ if gt (time.AsTime .Params.changedDate) .Params.publishDate }} aktualisierte {{ else }} neue {{ end }}{{ end }}{{ end }} Rezept "{{ .Title }}" an auf &lt;a href="{{ .Permalink }}">{{ .Site.Title }}&lt;/a></description>
     </item>
     {{ end }}
   </channel>
