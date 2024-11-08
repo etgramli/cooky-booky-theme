@@ -2,26 +2,24 @@
 <div class="alphabeticalList">
   <h1>Alphabetisch</h1>
   <!-- 1. Create map -->
-   {{ $scratch := newScratch }}
-   {{ $allMapName := "mapName"}}
+   {{- $scratch := newScratch -}}
+   {{- $allMapName := "mapName" -}}
   <!-- 2. Add all recipes -->
-  {{ range (where .Site.RegularPages "Type" "recipe") }}
+  {{- range (where .Site.RegularPages "Type" "recipe") -}}
     {{ $scratch.SetInMap $allMapName .Title (slice . ) }}
-  {{ end }}
-
+  {{- end -}}
   <!-- 3. Add all index terms --> <!-- THERE MAY BE DUPLICATES !!! -->
-  {{ range $taxo, $terms := .Site.Taxonomies.index }}
+  {{- range $taxo, $terms := .Site.Taxonomies.index -}}
     {{ $scratch.SetInMap $allMapName (strings.FirstUpper $taxo) $terms }}
-  {{ end }}
-
+  {{- end -}}
   <div id="letters">
     {{ $keys := slice }}
-    {{ range $k, $v := $scratch.Get $allMapName }}{{ $keys = append $k $keys }}{{ end }}
-    {{ $keys = sort $keys}}
+    {{- range $k, $v := $scratch.Get $allMapName }}{{ $keys = append $k $keys }}{{- end -}}
+    {{- $keys = sort $keys -}}
     {{- $data := newScratch -}}
     {{- $data.Set "oldletter" "" -}}
     {{- range $keys -}}
-      {{- $data.Set "startletter" (upper (substr . 0 1)) -}}
+      {{ $data.Set "startletter" (upper (substr . 0 1)) }}
       {{- if ne ($data.Get "startletter") ($data.Get "oldletter") -}}
         <a href="#{{ $data.Get "startletter" }}">{{ $data.Get "startletter" }}</a>
         {{ $data.Set "oldletter" ($data.Get "startletter") }}
@@ -32,32 +30,32 @@
   {{- $data := newScratch -}}
   {{- $data.Set "oldletter" "" -}}
   {{- range $keys -}}
-    {{ $data.Set "startletter" (substr . 0 1) }}
+    {{- $data.Set "startletter" (substr . 0 1) -}}
     {{ if ne ($data.Get "startletter") ($data.Get "oldletter") }}
       <h3 id="{{ $data.Get "startletter" }}">{{ $data.Get "startletter" }}</h3>
-      {{ $data.Set "oldletter" ($data.Get "startletter") }}
+      {{- $data.Set "oldletter" ($data.Get "startletter") -}}
     {{- end -}}
-    {{ $values := index ($scratch.Get $allMapName) . }}
-    {{ with $values }}
+    {{- $values := index ($scratch.Get $allMapName) . -}}
+    {{- with $values -}}
       {{ if eq (len $values) 1}}{{/* Single recipe */}}
-        {{ if eq (printf "%T" $values) "page.WeightedPages"}}{{/* Single recipes in category (alias i.e. Pommes->Fish'n'Chips) */}}
-          {{ range $values }}
+        {{ if eq (printf "%T" $values) "page.WeightedPages" }}{{/* Single recipes in category (alias i.e. Pommes->Fish'n'Chips) */}}
+          {{- range $values -}}
             <div class="rlink"><a href="{{ .Page.Permalink }}">{{ $values.Page.Title }} ({{ .Page.Title }})</a></div>
-          {{ end }}
-        {{ else }}{{/* Title from recipe */}}
-          {{ range $values}}
+          {{- end -}}
+        {{- else -}}{{/* Title from recipe */}}
+          {{- range $values -}}
             <div class="rlink"><a href="{{ .Permalink }}">{{ .Title }}</a></div>
-          {{ end }}
-        {{ end }}
-      {{ else }}{{/* Multiple recipes in category */}}
+          {{- end -}}
+        {{- end -}}
+      {{- else -}}{{/* Multiple recipes in category */}}
         {{ $values.Page.Title }}
         <ul>
-          {{ range sort $values "Title" }}
+          {{ range sort $values "Title" -}}
           <li><a class="index-entry" href="{{ .Permalink }}">{{ .Title }}</a></li>
-          {{ end }}
+          {{ end -}}
         </ul>
-      {{ end }}
-    {{ end }}
+      {{- end -}}
+    {{- end -}}
   {{- end -}}
   </div>
   <button class="rounded-circle" onclick="scrollToTop()" id="toTopButton" title="Go to top">

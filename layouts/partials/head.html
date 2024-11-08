@@ -50,11 +50,11 @@
     <link rel='shortcut icon' type='image/svg' href='/img/CookyBookyLogoV1_Plate.svg' />
     <link rel='/apple-touch-icon' href='apple-touch-icon.png' />
 
-    {{- $options := (dict "targetPath" "css/styles.css" "outputStyle" "compressed") }}
-    {{ $style := resources.Get "sass/main.scss" }}
-    {{ if ne hugo.Environment "development "}}
-        {{ $style = $style | toCSS  $options | postCSS | minify | fingerprint | resources.PostProcess -}}
-    {{ else }}
+    {{- $options := (dict "targetPath" "css/styles.css" "outputStyle" "compressed") -}}
+    {{- $style := resources.Get "sass/main.scss" -}}
+    {{- if ne hugo.Environment "development" -}}
+        {{- $style = $style | toCSS  $options | postCSS | minify | fingerprint | resources.PostProcess -}}
+    {{- else -}}
         {{ $style = $style | toCSS  $options -}}
     {{ end }}
     <link rel="stylesheet" href="{{ $style.RelPermalink }}" media="screen">
@@ -69,13 +69,9 @@
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-title" content="Cooky Booky" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    {{ with resources.Get "sw-template.js" }}
-        {{ with resources.ExecuteAsTemplate "sw.js" $ . }}
-        <script>
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('{{ .RelPermalink }}');
-        };
-        </script>
-        {{ end }}
+    {{ with resources.Get "sw-template.js" -}}
+    {{- with resources.ExecuteAsTemplate "sw.js" $ . -}}
+    <script>if ('serviceWorker' in navigator) {navigator.serviceWorker.register('{{ .RelPermalink }}');};</script>
+    {{- end -}}
     {{ end }}
 </head>
