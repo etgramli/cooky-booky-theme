@@ -5,7 +5,7 @@
   <picture class="order-md-0 p-0">
     {{- $imageHuge := $image.Fill ($.Params.bigImageOrientation | printf "%s %s" "1024x576 webp" | printf "%s") -}}
     {{- $imageTiny := $image.Fill ($.Params.bigImageOrientation | printf "%s %s" "430x242 webp" | printf "%s") -}}
-    <source media="(min-width: {{$imageHuge.Width}}px)" width="{{ $imageHuge.Width }}" height="{{ $imageHuge.Height }}" srcset="{{ $imageHuge.RelPermalink }}">
+    <source media="(min-width: {{$imageTiny.Width}}px)" width="{{ $imageHuge.Width }}" height="{{ $imageHuge.Height }}" srcset="{{ $imageHuge.RelPermalink }}">
     <source width="{{ $imageTiny.Width }}" height="{{ $imageTiny.Height }}" srcset="{{ $imageTiny.RelPermalink }}">
     <img class="image img-fluid" width="{{ $imageTiny.Width }}" height="{{ $imageTiny.Height }}" src="{{ $imageTiny.RelPermalink }}" alt="Bild von {{.Title}}" />
   </picture>
