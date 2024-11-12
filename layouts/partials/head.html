@@ -26,7 +26,7 @@
         <meta property="og:image:width" content="256" />
         <meta property="og:image:height" content="256" />
     {{ else }}
-        {{- $openGraphImage := $image.Fill (.Params.bigImageOrientation | printf "%s %s" "1200x630 webp q60" | printf "%s") }}
+        {{- $openGraphImage := $image.Fill (.Params.bigImageOrientation | printf "%s %s" "1200x672 webp" | printf "%s") }}
         <meta property="og:image" content="{{ $openGraphImage.Permalink }}" />
         <meta property="og:image:type" content="{{ $openGraphImage.MediaType }}" />
         <meta property="og:image:width" content="{{ $openGraphImage.Width }}" />

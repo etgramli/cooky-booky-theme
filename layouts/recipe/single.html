@@ -3,7 +3,7 @@
   {{ $image := .Resources.GetMatch (printf "%s%s" .Params.bigImageName ".jpg") }}
   {{ with $image }}
   <picture class="order-md-0 p-0">
-    {{- $imageHuge := $image.Fill ($.Params.bigImageOrientation | printf "%s %s" "1024x576 webp" | printf "%s") -}}
+    {{- $imageHuge := $image.Fill ($.Params.bigImageOrientation | printf "%s %s" "1200x672 webp" | printf "%s") -}}
     {{- $imageTiny := $image.Fill ($.Params.bigImageOrientation | printf "%s %s" "430x242 webp" | printf "%s") -}}
     <source media="(min-width: {{$imageTiny.Width}}px)" width="{{ $imageHuge.Width }}" height="{{ $imageHuge.Height }}" srcset="{{ $imageHuge.RelPermalink }}">
     <source width="{{ $imageTiny.Width }}" height="{{ $imageTiny.Height }}" srcset="{{ $imageTiny.RelPermalink }}">
