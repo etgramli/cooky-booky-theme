@@ -36,7 +36,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   height: 100%;
-  padding-bottom: 80px;
+  padding-bottom: 5em;
   background-color: white;
   color: $color_text_light;
 }
@@ -55,50 +55,50 @@ a:visited {
   color: $color_link_visited_light;
 }
 .homeButton {
-  padding: 0px 8px;
+  padding: 0 .5em;
   text-align: left;
   text-decoration: none;
   font-weight: bold;
   cursor: pointer;
 }
 .navigationButton {
-  padding: 0 8px;
+  padding: 0 .5em;
   text-align: left;
   text-decoration: none;
   font-weight: normal;
   cursor: pointer;
 }
 .searchInput {
-  margin-right: 2px;
+  margin-right: .125em;
   min-width: 5ch;
   max-width: 24ch;
 }
 .randomRecipeButton {
   background-color: $color_button;
-  width: 55px;
-  height: 55px;
+  width: 3.5em;
+  height: 3.5em;
   position: fixed;
   z-index: 999;
-  bottom: 30px;
-  right: 30px;
+  bottom: 1.75em;
+  right: 1.75em;
 }
 .downloadButton {
   background-color: $color_button;
-  width: 55px;
-  height: 55px;
+  width: 3.5em;
+  height: 3.5em;
   position: fixed;
   z-index: 997;
-  bottom: 100px;
-  right: 30px;
+  bottom: 6em;
+  right: 1.75em;
 }
 .shareButton {
   background-color: $color_button;
-  width: 55px;
-  height: 55px;
+  width: 3.5em;
+  height: 3.5em;
   position: fixed;
   z-index: 998;
-  bottom: 30px;
-  right: 100px;
+  bottom: 1.75em;
+  right: 6em;
 }
 @media (any-pointer: fine) {
   .shareButton {
@@ -126,7 +126,7 @@ div.intro-text {
   }
 }
 h2 {
-  padding-top: 24px;
+  padding-top: 1em;
 }
 .links {
   padding: 0;
@@ -136,7 +136,7 @@ h2 {
   list-style: none;
 }
 li {
-  padding: 4px;
+  padding: .25em;
 }
 
 div.categoriesList {
@@ -172,15 +172,15 @@ h1.recipeTitle {
   font-size: 4em;
 }
 h3 {
-  margin-top: 10px;
-  margin-bottom: 4px;
+  margin-top: 1em;
+  margin-bottom: 0.25em;
   text-align: center;
 }
 div.recipe {
   text-align: center;
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 30px;
+  margin-bottom: 0;
   #textcontent {
     display: block;
     max-width: 1280px;
@@ -230,7 +230,7 @@ h2#bemerkung {
 }
 .infoDesc {
   display: inline-block;
-  margin: 4px 8px;
+  margin: 0.25em 0.5em;
 }
 .portion {
   display: inline;
@@ -247,25 +247,25 @@ h2#bemerkung {
 div.alphabeticalList {
   text-align: center;
   div#letters {
-    margin: 4px 24px;
+    margin: .125em 2em;
   }
   div.list {
     display: inline-block;
     text-align: left;
     div.rlink {
-      margin-top: 8px;
-      margin-bottom:8px;
+      margin-top: .5em;
+      margin-bottom: .5em;
     }
     li {
       list-style: none;
     }
   }
   h3 {
-    padding-top: 32px;
+    padding-top: 1.5em;
   }
   a {
-    margin-left: 3px;
-    margin-right: 3px;
+    margin-left: .25em;
+    margin-right: .25em;
   }
 }
 
@@ -290,7 +290,7 @@ div.alphabeticalList {
   .hint {
     display: inline-block;
     text-align: left;
-    padding: 0 20px 0 20px;
+    padding: 0 3em;
     color: $color_hint_dark;
   }
   img {
@@ -316,12 +316,12 @@ div.alphabeticalList {
 }
 
 #toTopButton {
-  display: none; /* Hidden by default */
-  position: fixed; /* Fixed/sticky position... */
-  bottom: 30px; /* ...at the bottom... */
-  left: 30px; /* ...left of the page */
-  z-index: 99;
   background-color: $color_button;
-  width: 55px;
-  height: 55px;
+  width: 3.5em;
+  height: 3.5em;
+  position: fixed;
+  z-index: 99;
+  bottom: 1.75em;
+  left: 1.75em;
+  display: none; /* Hidden by default */
 }
