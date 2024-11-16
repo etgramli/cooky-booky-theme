@@ -1,0 +1,224 @@
+@font-face {
+    font-display: fallback;
+    font-family: 'Amatic SC';
+    font-style: bold;
+    font-weight: 700;
+    src:
+      url('../font/AmaticSC-Bold.woff2') format('woff2'),
+      url('../font/AmaticSC-Bold.woff') format('woff');
+  }
+  @font-face {
+    font-display: fallback;
+    font-family: 'Source Sans';
+    font-style: normal;
+    font-weight: 400;
+    src:
+      url('../font/SourceSans3[wght].woff2') format('woff2'),
+      url('../font/SourceSans3[wght].woff') format('woff');
+  }
+  $color_text_light: black;
+  $color_bg_light: white;
+  $color_link_light: green;
+  $color_link_visited_light: darkgreen;
+  $color_navbar_bg_light: lightgray;
+  $color_ingredients_light: darkblue;
+  $color_hint_light: darkred;
+  body {
+    font-family: "Source Sans", Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    height: 100%;
+    background-color: white;
+    color: $color_text_light;
+  }
+  
+  div.mainContainer {
+    text-align: center;
+  }
+  /* Navbar */
+  .navigation {
+    display: none;
+  }
+  a:link {
+    color: $color_link_light;
+  }
+  a:visited {
+    color: $color_link_visited_light;
+  }
+  .randomRecipeButton {
+    display: none;
+  }
+  .downloadButton {
+    display: none;
+  }
+  .shareButton {
+    display: none;
+  }
+  .actionButtonIcon {
+    margin: auto;
+    display: block !important;
+  }
+  
+  h1 {
+    font-family: 'Amatic SC';
+    font-size: 2rem;
+    margin: 1em;
+  }
+  div.intro-text {
+    margin: 0.5em auto;
+    display: flex;
+    justify-content: center;
+    max-width: 30em;
+    text-align: left;
+    p {
+      margin: 0.5em 1.5em;
+    }
+  }
+  h2 {
+    padding-top: 1em;
+  }
+  .links {
+    padding: 0;
+    display: inline-block;
+    text-align: left;
+    list-style-type: disc;
+    list-style: none;
+  }
+  li {
+    padding: .25em;
+  }
+  
+  div.categoriesList {
+    text-align: center;
+    .categoriesLinks {
+      display: inline-block;
+      list-style: none;
+      padding: 0;
+      margin: 0 auto;
+      text-align: left;
+    }
+  }
+  div.recipeListContainer {
+    text-align: center;
+    .recipesPerCategory {
+      display: inline-block;
+      list-style: none;
+      padding: 0;
+      margin: 0 auto;
+      text-align: left;
+    }
+  }
+  
+  /* Recipe */
+  .image {
+    width: 100%;
+    max-height: 20em;
+    object-fit: cover;
+  }
+  h1.recipeTitle {
+    margin: .25em;
+    font-family: 'Amatic SC', cursive;
+    font-size: 4em;
+  }
+  h3 {
+    margin-top: 1em;
+    margin-bottom: 0.25em;
+    text-align: center;
+  }
+  div.recipe {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 0;
+    #textcontent {
+      display: block;
+      max-width: 1280px;
+      margin: auto;
+    }
+  }
+  div.row {
+    margin: 0;
+  }
+  div.ingredientCol {
+    color: darkblue;
+    table {
+      border-spacing: 0;
+      thead {
+        display: none;
+      }
+      td:nth-child(3) {
+        padding-left: 1em;
+      }
+      td {
+        padding-top: .25em;
+        padding-left: .125em;
+      }
+    }
+  }
+  table {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  ol {
+    text-align: left;
+  }
+  .hint {
+    display: inline-block;
+    text-align: left;
+    padding: 0 3em;
+    color: darkred;
+  }
+  h2#bemerkung {
+    text-align: center;
+  }
+  .info {
+    display: inline-block;
+    text-align: center;
+    margin: auto;
+    width: 90%;
+  }
+  .infoDesc {
+    display: inline-block;
+    margin: 0.25em 0.5em;
+  }
+  .portion {
+    display: inline;
+  }
+  .inlineDiv {
+    display: inline;
+  }
+  .symbol {
+    display: inline-block;
+    text-align: center;
+  }
+  
+  /* Alphabetical list */
+  div.alphabeticalList {
+    text-align: center;
+    div#letters {
+      margin: .125em 2em;
+    }
+    div.list {
+      display: inline-block;
+      text-align: left;
+      div.rlink {
+        margin-top: .5em;
+        margin-bottom: .5em;
+      }
+      li {
+        list-style: none;
+      }
+    }
+    h3 {
+      padding-top: 1.5em;
+    }
+    a {
+      margin-left: .25em;
+      margin-right: .25em;
+    }
+  }
+
+  #toTopButton {
+    display: none;
+  }
+  

@@ -50,6 +50,14 @@
     <link rel='shortcut icon' type='image/svg' href='/img/CookyBookyLogoV1_Plate.svg' />
     <link rel='/apple-touch-icon' href='apple-touch-icon.png' />
 
+    {{- $optionsprint := (dict "targetPath" "css/styles-print.css" "outputStyle" "compressed") -}}
+    {{- $styleprint := resources.Get "sass/main-print.scss" -}}
+    {{- if ne hugo.Environment "development" -}}
+        {{- $styleprint = $styleprint | toCSS  $optionsprint | postCSS | minify | fingerprint | resources.PostProcess -}}
+    {{- else -}}
+        {{ $styleprint = $styleprint | toCSS  $optionsprint -}}
+    {{ end }}
+    <link rel="stylesheet" href="{{ $styleprint.RelPermalink }}" media="print">
     {{- $options := (dict "targetPath" "css/styles.css" "outputStyle" "compressed") -}}
     {{- $style := resources.Get "sass/main.scss" -}}
     {{- if ne hugo.Environment "development" -}}
