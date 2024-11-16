@@ -73,35 +73,29 @@ a:visited {
   min-width: 5ch;
   max-width: 24ch;
 }
-.randomRecipeButton {
+.boutton {
   background-color: $color_button;
   width: 3.5em;
   height: 3.5em;
   position: fixed;
+}
+#randomRecipeButton {
   z-index: 999;
   bottom: 1.75em;
   right: 1.75em;
 }
-.downloadButton {
-  background-color: $color_button;
-  width: 3.5em;
-  height: 3.5em;
-  position: fixed;
+#downloadButton {
   z-index: 997;
   bottom: 6em;
   right: 1.75em;
 }
-.shareButton {
-  background-color: $color_button;
-  width: 3.5em;
-  height: 3.5em;
-  position: fixed;
+#shareButton {
   z-index: 998;
   bottom: 1.75em;
   right: 6em;
 }
 @media (any-pointer: fine) {
-  .shareButton {
+  #shareButton {
     visibility: hidden;
   }
 }
@@ -316,10 +310,6 @@ div.alphabeticalList {
 }
 
 #toTopButton {
-  background-color: $color_button;
-  width: 3.5em;
-  height: 3.5em;
-  position: fixed;
   z-index: 99;
   bottom: 1.75em;
   left: 1.75em;

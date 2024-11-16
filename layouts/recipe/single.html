@@ -49,7 +49,7 @@
   </div>
   {{- $pdf := .Resources.GetMatch "*.pdf" }}
   {{ if $pdf -}}
-  <button class="rounded-circle downloadButton" id="downloadButton" aria-label="Download current recipe as PDF" onclick="window.open('{{$pdf.RelPermalink}}');">
+  <button class="rounded-circle boutton" id="downloadButton" aria-label="Download current recipe as PDF" onclick="window.open('{{$pdf.RelPermalink}}');">
     <i class="actionButtonIcon bi-file-earmark-arrow-down"></i>
   </button>
   {{- end -}}
