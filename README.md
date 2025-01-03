@@ -69,5 +69,4 @@ Weil bei ```fixed-top``` nach dem Hoch-Scrollen die Navbar immer über dem Inhal
 
 ## ToDo
 
-- Refactor to async calls
 - Refactor JS to files for better security
