@@ -316,7 +316,24 @@ div.alphabeticalList {
   display: none; /* Hidden by default */
 }
 
+#comment-form {
+  margin: 1em;
+}
+#username {
+  margin: .5em;
+}
 .comment-button {
   background-color: $color_button;
   color: black;
+  margin: .5em;
+  border-radius: .375em;
+}
+textarea {
+  resize: none;
+}
+.single-comment {
+  margin: auto;
+  padding: 1em;
+  max-width: 50%;
+  text-align: left;
 }
