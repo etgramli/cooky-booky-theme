@@ -38,6 +38,7 @@ Theme for my personal recipe website. It is responsive and minimal and includes 
 ### Bild-Varianten
 
 Es werden verschiedene Bild-Varianten (im Webp-Format) generiert, die sich an folgenden Szenarien orientieren:
+
 | Auflösung | Anwendungszweck                                        |
 |-----------|--------------------------------------------------------|
 | 1280x720  | Viewport-Breite ab 1280 Pixeln Breite (Laptop/Desktop) |
