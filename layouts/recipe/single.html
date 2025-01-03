@@ -45,6 +45,19 @@
     </div>
     <div class="row justify-content-md-center">
     {{ .Content }}
+    <div>
+      <h2>Kommentar schreiben</h2>
+      <form id="comment-form">
+        <input id="username" type="text" accept-charset="ASCII" maxlength="42" placeholder="Dein Name"><br>
+        <input id="commentText" type="text" accept-charset="ASCII" maxlength="255" placeholder="Dein Kommentar"><br>
+        <button class="comment-button" type="button" onclick="putComment()">Kommentar abschicken</button>
+      </form>
+      <button class="comment-button" onclick="getNumberOfComments()">Kommentare laden (<span id="commentsNumber"></span>)</button>
+      <button class="comment-button" onclick="getComments()">Kommentare anzeigen</button>
+      <h3>Kommentare</h3>
+      <div id="commentsContainer"></div>
+    </div>
+    <script src="/js/comment.js" defer></script>
     </div>
   </div>
   {{- $pdf := .Resources.GetMatch "*.pdf" }}

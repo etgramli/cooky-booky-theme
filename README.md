@@ -65,3 +65,9 @@ Weil bei ```fixed-top``` nach dem Hoch-Scrollen die Navbar immer über dem Inhal
 ### PWA- Hinweise
 
 - Icons im ```static```-Verzeichnis des Themes müssen bei Änderung neu generiert werden
+
+## ToDo
+
+- Add api path to config
+- Refactor to async calls
+- Refactor JS to files for better security
