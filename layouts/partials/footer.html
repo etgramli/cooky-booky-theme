@@ -2,7 +2,9 @@
     <button class="rounded-circle boutton" id="randomRecipeButton" aria-label="Go to a random recipe">
         <i class="actionButtonIcon bi" id="randomRecipeButtonIcon"></i>
     </button>
-    {{ partialCached "randomRecipeButtonScript.html" . }}
+    {{ $randomRecipeButtonScript := resources.Get "randomRecipeButtonScript.js" }}
+    {{ $randomRecipeButtonScript = $randomRecipeButtonScript | resources.ExecuteAsTemplate "js/randomRecipeButton.js" . }}
+    <script src="{{ $randomRecipeButtonScript.Permalink }}" defer></script>
     <button class="rounded-circle boutton" id="shareButton" aria-label="Share the current page">
         <i class="actionButtonIcon bi bi-share"></i>
     </button>
