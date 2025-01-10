@@ -61,20 +61,6 @@
   <button class="rounded-circle boutton" onclick="scrollToTop()" id="toTopButton" title="Go to top">
     <i class="bi bi-caret-up-fill"></i>
   </button>
-  <script type="text/javascript">
-    let mybutton = document.getElementById("toTopButton");
-    window.onscroll = function() {toggleToTopButton()};
-    function toggleToTopButton() {
-      if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-        mybutton.style.display = "block";
-      } else {
-        mybutton.style.display = "none";
-      }
-    }
-    function scrollToTop() {
-      document.body.scrollTop = 0; // Safari
-      document.documentElement.scrollTop = 0; // other browsers
-    }
-  </script>
+  <script src="/js/scrollbutton.js" defer></script>
 </div>
 {{ end }}
