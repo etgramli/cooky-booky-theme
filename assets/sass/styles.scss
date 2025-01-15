@@ -16,29 +16,39 @@
     url('../font/SourceSans3[wght].woff2') format('woff2'),
     url('../font/SourceSans3[wght].woff') format('woff');
 }
-$color_text_light: black;
-$color_text_dark: #D0D0D0;
-$color_bg_light: white;
-$color_bg_dark: #161616;
-$color_link_light: green;
-$color_link_dark: rgb(129, 189, 129);
-$color_link_visited_light: darkgreen;
-$color_link_visited_dark: rgb(106, 148, 106);
-$color_navbar_bg_light: lightgray;
-$color_navbar_bg_dark: rgb(128, 128, 128);
-$color_ingredients_light: darkblue;
-$color_ingredients_dark: lightblue;
-$color_hint_light: darkred;
-$color_hint_dark: lightcoral;
 $color_button: #42b983;
-body {
+/*! purgecss start ignore */
+[data-theme="light"] {
+  --color-bg: white;
+  --color-text: black;
+  --color-link: green;
+  --color-link-visited: darkgreen;
+  --color-navbar-bg: lightgray;
+  --color-ingredients: darkblue;
+  --color-hint: darkred;
+  --image-grayscale: 0%;
+  --image-brightness: 100%;
+}
+[data-theme="dark"] {
+  --color-bg: #161616;
+  --color-text: #D0D0D0;
+  --color-link: rgb(116, 211, 116);
+  --color-link-visited: rgb(192, 231, 192);
+  --color-navbar-bg: rgb(128, 128, 128);
+  --color-ingredients: lightblue;
+  --color-hint: mistyrose;
+  --image-grayscale: 50%;
+  --image-brightness: 75%;
+}
+/*! purgecss end ignore */
+ body {
   font-family: "Source Sans", Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   height: 100%;
   padding-bottom: 5em;
-  background-color: white;
-  color: $color_text_light;
+  background-color: var(--color-bg);
+  color: var(--color-text);
 }
 
 div.mainContainer {
@@ -46,13 +56,13 @@ div.mainContainer {
 }
 /* Navbar */
 .navigation {
-  background-color: $color_navbar_bg_light;
+  background-color: var(--color-navbar-bg);
 }
 a:link {
-  color: $color_link_light;
+  color: var(--color-link);
 }
 a:visited {
-  color: $color_link_visited_light;
+  color: var(--color-link-visited);
 }
 .homeButton {
   padding: 0 .5em;
@@ -159,6 +169,7 @@ div.recipeListContainer {
   width: 100%;
   max-height: 24em;
   object-fit: cover;
+  filter: #{"grayscale(var(--image-grayscale)) brightness(var(--image-brightness))"};
 }
 h1.recipeTitle {
   margin: .25em;
@@ -185,7 +196,7 @@ div.row {
   margin: 0;
 }
 div.ingredientCol {
-  color: darkblue;
+  color: var(--color-ingredients);
   table {
     border-spacing: 0;
     thead {
@@ -211,7 +222,7 @@ ol {
   display: inline-block;
   text-align: left;
   padding: 0 3em;
-  color: darkred;
+  color: var(--color-hint);
 }
 h2#bemerkung {
   text-align: center;
@@ -263,38 +274,6 @@ div.alphabeticalList {
   }
 }
 
-/* Night mode */
-@media(prefers-color-scheme: dark) {
-  body {
-    color: $color_text_dark;
-    background-color: $color_bg_dark;
-  }
-  .navigation {
-    background-color: $color_navbar_bg_dark;
-  }
-  a:link {
-    color: $color_link_dark;
-  }
-  a:visited {
-    color: $color_link_visited_dark;
-  }
-  div.ingredientCol {
-    color: $color_ingredients_dark;
-  }
-  .hint {
-    display: inline-block;
-    text-align: left;
-    padding: 0 3em;
-    color: $color_hint_dark;
-  }
-  img {
-    filter: grayscale(50%) brightness(75%);
-  }
-  li.list-group-item {
-    background-color: $color_navbar_bg_dark;
-  }
-}
-
 /* Search */
 #searchResults {
   position: absolute;
@@ -314,4 +293,10 @@ div.alphabeticalList {
   bottom: 1.75em;
   left: 1.75em;
   display: none; /* Hidden by default */
+}
+
+#theme-toggle-boutton {
+  width: 2.5em;
+  height: 2.5em;
+  background-color: $color_button;
 }
