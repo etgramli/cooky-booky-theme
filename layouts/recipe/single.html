@@ -48,15 +48,20 @@
     </div>
     <div class="row justify-content-md-center">
     {{ .Content }}
-    <div id="comments-div" style="display: none;">
+    <div id="comments-form" style="display: none;">
       <h2>Kommentar schreiben</h2>
       <form id="comment-form">
         <input id="username" type="text" accept-charset="ASCII" maxlength="42" placeholder="Dein Name"><br>
         <textarea form="comment-form" id="commentText" maxlength="255" rows="4" cols="42" placeholder="Dein Kommentar"></textarea><br>
-        <button class="comment-button" type="button" onclick="putComment()">Kommentar abschicken</button>
+        <button class="comment-button popup" type="button" onclick="putComment()">
+          Kommentar abschicken
+          <span class="popuptext" id="popup-invalid-char">Ungültiges Zeichen im Username/Text!</span>
+          <span class="popuptext" id="popup-already-commented">Du hast unter diesem Rezept schon gepostet!</span>
+          <span class="popuptext" id="popup-empty-name">Namensfeld ist leer!</span>
+          <span class="popuptext" id="popup-empty-text">Textfeld ist leer!</span>
+        </button>
       </form>
-      <button class="comment-button" onclick="getComments()">Kommentare laden (<span id="commentsNumber"></span>)</button>
-      <h3>Kommentare</h3>
+      <h3 id="comments-head" style="display: none;">Kommentare (<span id="commentsNumber"></span>)</h3>
       <div id="commentsContainer"></div>
     </div>
     {{ with resources.Get "comment.js" -}}

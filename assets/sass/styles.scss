@@ -16,7 +16,6 @@
     url('../font/SourceSans3[wght].woff2') format('woff2'),
     url('../font/SourceSans3[wght].woff') format('woff');
 }
-$color_button: #42b983;
 /*! purgecss start ignore */
 [data-theme="light"] {
   --color-bg: white;
@@ -26,6 +25,9 @@ $color_button: #42b983;
   --color-navbar-bg: lightgray;
   --color-ingredients: darkblue;
   --color-hint: darkred;
+  --color-button: #42b983;
+  --color-popup-bg: #555;
+  --color-popup-text: #fff;
   --image-grayscale: 0%;
   --image-brightness: 100%;
 }
@@ -37,6 +39,9 @@ $color_button: #42b983;
   --color-navbar-bg: rgb(128, 128, 128);
   --color-ingredients: lightblue;
   --color-hint: mistyrose;
+  --color-button: #1d6846;
+  --color-popup-bg: #555;
+  --color-popup-text: #fff;
   --image-grayscale: 50%;
   --image-brightness: 75%;
 }
@@ -84,7 +89,8 @@ a:visited {
   max-width: 24ch;
 }
 .boutton {
-  background-color: $color_button;
+  background-color: var(--color-button);
+  color: var(--color-text);
   width: 3.5em;
   height: 3.5em;
   position: fixed;
@@ -298,7 +304,7 @@ div.alphabeticalList {
 #theme-toggle-boutton {
   width: 2.5em;
   height: 2.5em;
-  background-color: $color_button;
+  background-color: var(--color-button);
 }
 
 #comment-form {
@@ -308,8 +314,8 @@ div.alphabeticalList {
   margin: .5em;
 }
 .comment-button {
-  background-color: $color_button;
-  color: black;
+  background-color: var(--color-button);
+  color: var(--color-text);
   margin: .5em;
   border-radius: .375em;
 }
@@ -321,4 +327,44 @@ textarea {
   padding: 1em;
   max-width: 50%;
   text-align: left;
+}
+
+/* Popup */
+.popup {
+  position: relative;
+  display: inline-block;
+}
+
+.popup .popuptext {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 1s ease-in-out, visibility linear 1s;
+  width: 10em;
+  background-color: var(--color-popup-bg);
+  color: var(--color-popup-text);
+  text-align: center;
+  border-radius: 6px;
+  padding: .5em .5em;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -5em;
+}
+
+.popup .popuptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -.5em;
+  border-width: 5px;
+  border-style: solid;
+  border-color: var(--color-popup-bg) transparent transparent transparent;
+}
+
+.popup .show {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 1s ease-in-out;
 }

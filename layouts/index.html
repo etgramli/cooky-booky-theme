@@ -46,5 +46,14 @@
       window.location.replace(frag.replace("n", "m"));
     }
   </script>
+  <div id="comments-div" style="display: none;">
+    <h3>Letzte Kommentare</h3>
+    <div id="commentsContainer" style="justify-content: center;max-width: 50em;margin: 0.5em auto;"></div>
+  </div>
+  {{ with resources.Get "comment.js" -}}
+  {{- with resources.ExecuteAsTemplate "comment.js" $ . -}}
+  <script src="{{ .RelPermalink }}" defer></script>
+  {{- end -}}
+  {{ end }}
 </div>
 {{ end }}
