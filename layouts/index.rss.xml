@@ -2,7 +2,7 @@
 {{- if .IsHome -}}{{ $pctx = .Site }}{{- end -}}
 {{- $pages := slice -}}
 {{- if or $.IsHome $.IsSection -}}
-{{- $pages = (where (sort $pctx.RegularPages ".Params.date" "desc") "Type" "recipe") -}}
+{{- $pages = (where (sort $pctx.RegularPages ".Params.changedDate" "desc") "Type" "recipe") -}}
 {{- else -}}
 {{- $pages = $pctx.Pages -}}
 {{- end -}}
