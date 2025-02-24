@@ -16,6 +16,15 @@
     <li><a href="/category"><i class="bi bi-columns-gap"></i> Kategorien</a></li>
     <li><a href="/index.xml"><i class="bi bi-rss"></i> RSS</a></li>
   </ul>
+  {{ $todos := sort (where (where .Site.RegularPages "Type" "recipe") "Params.bigImageName" "eq" nil) ".Params.id" }}
+  {{ if gt (len $todos) 0 }}
+  <h2>ToDo</h2>
+  <ul class="list-unstyled links">
+    {{ range $todos }}
+    <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+    {{ end }}
+  </ul>
+  {{ end }}
   <script type="text/javascript">
     {{ $recipes := shuffle (where .Site.RegularPages "Type" "recipe") }}
     {{ if gt (len $recipes) 0 }}
