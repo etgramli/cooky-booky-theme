@@ -123,7 +123,7 @@ function getComments() {
         container.innerHTML = ""
         for (comment in commentsArray) {
           const current = commentsArray[comment];
-          container.insertAdjacentHTML("beforeend", "<div class='single-comment'><strong>" + current.userName + "</strong> (" + new Date(current.localDateTime).toLocaleString() + ")<br>" + current.commentText + "</div>");
+          container.insertAdjacentHTML("beforeend", "<div class='single-comment'><strong>" + current.userName + "</strong> (" + new Date(current.localDateTime).toLocaleString(undefined, {hour: "numeric", minute: "numeric", year: "numeric",month: "long", day: "numeric"}) + ")<br>" + current.commentText + "</div>");
         }
       }
     }
@@ -145,7 +145,7 @@ function getCommentsMain(references, titles) {
           console.log("/recipe/" + current.recipeId + "/");
           const idx = references.indexOf("/recipe/" + current.recipeId + "/");
           console.log(idx);
-          container.insertAdjacentHTML("beforeend", "<div class='single-comment'><strong>" + titles[idx] + "</strong><br><strong>" + current.userName + "</strong> (" + new Date(current.localDateTime).toLocaleString() + ")<br>" + current.commentText + "</div>");
+          container.insertAdjacentHTML("beforeend", "<div class='single-comment'><strong><a href=\"/recipe/" + current.recipeId + "/\">" + titles[idx] + "</a></strong><br><strong>" + current.userName + "</strong> (" + new Date(current.localDateTime).toLocaleString(undefined, {hour: "numeric", minute: "numeric", year: "numeric",month: "long", day: "numeric"}) + ")<br>" + current.commentText + "</div>");
         }
         if (commentsArray.length > 0) {
           document.getElementById('comments-div').style.removeProperty('display');
