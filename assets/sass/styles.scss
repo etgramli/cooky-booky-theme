@@ -130,7 +130,9 @@ div.intro-text {
   display: flex;
   justify-content: center;
   max-width: 30em;
-  text-align: left;
+  hyphens: auto;
+  text-align: justify;
+  text-align-last: left;
   p {
     margin: 0.5em 1.5em;
   }
