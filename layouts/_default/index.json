@@ -1,5 +1,10 @@
 {{- $.Scratch.Add "index" slice -}}
 {{- range where .Site.RegularPages "Type" "recipe" -}}
     {{- $.Scratch.Add "index" (dict "title" .Title "permalink" .Permalink) -}}
+    {{- $lnk := .Permalink -}}
+    {{- $ttl := .Title -}}
+    {{- range .Params.alias -}}
+        {{- $.Scratch.Add "index" (dict "title" (add . " (" $ttl ")") "permalink" $lnk) -}}
+    {{- end -}}
 {{- end -}}
 {{- $.Scratch.Get "index" | jsonify -}}
