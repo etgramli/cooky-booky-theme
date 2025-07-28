@@ -31,6 +31,47 @@
         <meta property="og:image:type" content="{{ $openGraphImage.MediaType }}" />
         <meta property="og:image:width" content="{{ $openGraphImage.Width }}" />
         <meta property="og:image:height" content="{{ $openGraphImage.Height }}" />
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Recipe",
+            "name": "{{ .Title }}",
+            "description": "{{ $description }}",
+            "datePublished": "{{ .Params.changedDate }}",
+            "image": "{{ $openGraphImage.Permalink }}",
+            "recipeCategory": "{{ .Params.category }}",
+            {{- if isset .Params "portionsize" }}
+            "recipeYield": "{{ .Params.portionSize }}",
+            {{- end }}
+            {{- if isset .Params "preparationtime" }}
+            {{- $p := .Params.preparationtime }}
+            {{- $p = replaceRE `(\d+-)?(\d+)` "$2" $p }}
+            {{- $p = replace $p "h" "H" }}
+            {{- $p = replace $p "Min" "M" }}
+            {{- $p = replace $p " " "" }}
+            "prepTime": "PT{{ $p }}",
+            {{- end }}
+            {{- if isset .Params "bakingtime" }}
+            {{- $s := .Params.bakingTime }}
+            {{- $s = replaceRE `(\d+-)?(\d+)` "$2" $s }}
+            {{- $s = replace $s "h" "H" }}
+            {{- $s = replace $s "Min" "M" }}
+            {{- $s = replace $s " " "" }}
+            "cookTime": "PT{{ $s }}",
+            {{- end }}
+            "keywords": "{{ delimit .Keywords ", " }}",
+            {{- if isset .Params "schema_ingredients" }}
+            "recipeIngredient": {{ .Params.schema_ingredients | jsonify }},
+            {{- end }}
+            {{- if isset .Params "schema_steps" }}
+            "recipeInstructions": {{ .Params.schema_steps | jsonify }},
+            {{- end }}
+            "author": {
+                "@type": "Person",
+                "name": "{{ .Params.author }}"
+            }
+        }
+        </script>
     {{ end }}
 
     {{- else -}}<!-- and the logo and tags on any other page -->
