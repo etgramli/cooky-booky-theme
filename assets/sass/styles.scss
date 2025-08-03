@@ -173,87 +173,87 @@ div.recipeListContainer {
 }
 
 /* Recipe */
-.image {
-  width: 100%;
-  max-height: 24em;
-  object-fit: cover;
-  filter: #{"grayscale(var(--image-grayscale)) brightness(var(--image-brightness))"};
-}
-h1.recipeTitle {
-  margin: .25em;
-  font-family: 'Amatic SC', cursive;
-  font-size: 4em;
-}
-h3 {
-  margin-top: 1em;
-  margin-bottom: 0.25em;
-  text-align: center;
-}
 div.recipe {
   text-align: center;
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 0;
+  .image {
+    width: 100%;
+    max-height: 24em;
+    object-fit: cover;
+    filter: #{"grayscale(var(--image-grayscale)) brightness(var(--image-brightness))"};
+  }
   #textcontent {
     display: block;
     max-width: 1280px;
     margin: auto;
+    h1.recipeTitle {
+      margin: .25em;
+      font-family: 'Amatic SC', cursive;
+      font-size: 4em;
+    }
+    .info {
+      display: inline-block;
+      text-align: center;
+      margin: auto;
+      width: 90%;
+      .infoDesc {
+        display: inline-block;
+        margin: 0.25em 0.5em;
+      }
+    }
+    .portion {
+      display: inline;
+    }
+    .inlineDiv {
+      display: inline;
+    }
+    .symbol {
+      display: inline-block;
+      text-align: center;
+    }
+    div.row {
+      margin: 0;
+    }
+    table {
+      margin-left: auto;
+      margin-right: auto;
+    }
+    ol {
+      text-align: left;
+    }
+    div.ingredientCol {
+      color: var(--color-ingredients);
+      table {
+        border-spacing: 0;
+        thead {
+          display: none;
+        }
+        td:nth-child(3) {
+          padding-left: 1em;
+        }
+        td {
+          padding-top: .25em;
+          padding-left: .125em;
+        }
+      }
+    }
+    h2#bemerkung {
+      text-align: center;
+    }
+    .hint {
+      display: inline-block;
+      text-align: left;
+      padding: 0 3em;
+      color: var(--color-hint);
+    }
   }
-}
-div.row {
-  margin: 0;
-}
-div.ingredientCol {
-  color: var(--color-ingredients);
-  table {
-    border-spacing: 0;
-    thead {
-      display: none;
-    }
-    td:nth-child(3) {
-      padding-left: 1em;
-    }
-    td {
-      padding-top: .25em;
-      padding-left: .125em;
-    }
+  h3#comments-head {
+    margin-top: 1em;
+    margin-bottom: 0.25em;
+    text-align: center;
   }
-}
-table {
-  margin-left: auto;
-  margin-right: auto;
-}
-ol {
-  text-align: left;
-}
-.hint {
-  display: inline-block;
-  text-align: left;
-  padding: 0 3em;
-  color: var(--color-hint);
-}
-h2#bemerkung {
-  text-align: center;
-}
-.info {
-  display: inline-block;
-  text-align: center;
-  margin: auto;
-  width: 90%;
-}
-.infoDesc {
-  display: inline-block;
-  margin: 0.25em 0.5em;
-}
-.portion {
-  display: inline;
-}
-.inlineDiv {
-  display: inline;
-}
-.symbol {
-  display: inline-block;
-  text-align: center;
 }
 
 /* Alphabetical list */
@@ -369,4 +369,22 @@ textarea {
   visibility: visible;
   opacity: 1;
   transition: opacity 1s ease-in-out;
+}
+
+div.tips {
+  margin: 0.5em auto;
+  max-width: 32em;
+  hyphens: auto;
+  h1, h2 {
+    text-align: center;
+  }
+  table {
+    margin-left: auto;
+    margin-right: auto;
+    border-collapse: collapse;
+  }
+  th, td {
+    padding-left: 0.75em;
+    text-align: left;
+  }
 }
