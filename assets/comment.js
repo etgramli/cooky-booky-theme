@@ -5,7 +5,7 @@ function getRecipeId() {
 
 function queryNumberOfComments() {
   const commentnummberrequest = new XMLHttpRequest();
-  commentnummberrequest.open("GET", "{{ .Site.Params.Backend_url }}/comments/" + getRecipeId(), true);
+  commentnummberrequest.open("GET", "{{ .Site.Params.Backend_url }}/comment/" + getRecipeId() + "/amount", true);
   commentnummberrequest.onload = (e) => {
     if (commentnummberrequest.readyState === 4) {
       if (commentnummberrequest.status === 200) {
@@ -26,7 +26,7 @@ function queryNumberOfComments() {
 
 function queryNumberOfRatings() {
   const ratingRequest = new XMLHttpRequest();
-  ratingRequest.open("GET", "{{ .Site.Params.Backend_url }}/ratings/" + getRecipeId(), true);
+  ratingRequest.open("GET", "{{ .Site.Params.Backend_url }}/rating/" + getRecipeId() + "/amount", true);
   ratingRequest.onload = (e) => {
     if (ratingRequest.readyState === 4) {
       if (ratingRequest.status === 200) {
@@ -71,9 +71,10 @@ function registerStarContainer() {
     const rating = parseInt(e.target.id.substring(e.target.id.length - 1));
     if (Number.isInteger(rating)) {
       const postRatingRequest = new XMLHttpRequest();
-      postRatingRequest.open("POST", "{{ .Site.Params.Backend_url }}/rating/" + getRecipeId() + "/" + rating, true);
+      postRatingRequest.open("POST", "{{ .Site.Params.Backend_url }}/rating/" + getRecipeId(), true);
+      postRatingRequest.setRequestHeader("Content-Type", "application/json");
       postRatingRequest.onload = (e) => {console.log("Rating sent: " + rating);}
-      postRatingRequest.send();
+      postRatingRequest.send(rating);
       setTimeout(queryNumberOfRatings, 125);
     }
   });
@@ -93,7 +94,8 @@ function putComment() {
     return;
   }
   const postRatingRequest = new XMLHttpRequest();
-  postRatingRequest.open("POST", "{{ .Site.Params.Backend_url }}/comment/" + getRecipeId() + "/" + username, true);
+  postRatingRequest.open("POST", "{{ .Site.Params.Backend_url }}/comment/" + getRecipeId(), true);
+  postRatingRequest.setRequestHeader("Content-Type", "application/json");
   postRatingRequest.onload = (e) => {
     if (postRatingRequest.readyState === 4) {
       if (postRatingRequest.status == 200) {
@@ -110,7 +112,11 @@ function putComment() {
       }
     }
   }
-  postRatingRequest.send(commenttext);
+  postRatingRequest.send(JSON.stringify({
+    "commentText": commenttext,
+    "userName": username,
+    "recipeId": getRecipeId()
+  }));
 };
 function getComments() {
   const getCommentsRequest = new XMLHttpRequest();
@@ -133,7 +139,7 @@ function getComments() {
 
 function getCommentsMain(references, titles) {
   const getCommentsRequest = new XMLHttpRequest();
-  getCommentsRequest.open("GET", "{{ .Site.Params.Backend_url }}/comments/last", true);
+  getCommentsRequest.open("GET", "{{ .Site.Params.Backend_url }}/comment/last", true);
   getCommentsRequest.onload = (e) => {
     if (getCommentsRequest.readyState === 4) {
       if (getCommentsRequest.status === 200) {
