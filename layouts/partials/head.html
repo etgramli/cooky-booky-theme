@@ -6,7 +6,7 @@
     <meta property="og:url" content="{{ .Permalink }}" />
     <meta property="og:type" content="website" />
 
-    {{- if eq .Params.type "recipe" }}<!-- Tags and open graph image for recipes -->
+    {{- if eq .Section "recipe" }}<!-- Tags and open graph image for recipes -->
     {{- $title := printf "%s | %s | Rezept | %s" .Title .Params.category .Site.Title }}
     {{ $description := printf "Mit diesem Rezept lernst du wie du %s selber zubereiten kannst. Schaue hier bei %s vorbei und koche das Rezept einfach nach!" .Title .Site.Title -}}
     <title>{{ $title }}</title>
