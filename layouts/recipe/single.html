@@ -1,13 +1,20 @@
 {{ define "main" }}
 <div class="recipe justify-content-md-center">
-  {{ $image := .Resources.GetMatch (printf "%s%s" .Params.bigImageName ".jpg") }}
+  {{ $image := .Resources.Get (printf "%s.jpg" .Params.bigImageName) }}
   {{ with $image }}
+
+  {{ $altText := ($.Params.Title | printf "Bild von %s") }}
+  {{ with .Exif }}
+    {{ with .Tags.UserComment }}
+      {{ $altText = . }}
+    {{ end }}
+  {{ end }}
   <picture class="order-md-0 p-0">
     {{- $imageHuge := $image.Fill ($.Params.bigImageOrientation | printf "%s %s" "1200x672 webp" | printf "%s") -}}
     {{- $imageTiny := $image.Fill ($.Params.bigImageOrientation | printf "%s %s" "430x242 webp" | printf "%s") -}}
     <source media="(min-width: {{$imageTiny.Width}}px)" width="{{ $imageHuge.Width }}" height="{{ $imageHuge.Height }}" srcset="{{ $imageHuge.RelPermalink }}">
     <source width="{{ $imageTiny.Width }}" height="{{ $imageTiny.Height }}" srcset="{{ $imageTiny.RelPermalink }}">
-    <img class="image img-fluid" width="{{ $imageTiny.Width }}" height="{{ $imageTiny.Height }}" src="{{ $imageTiny.RelPermalink }}" alt="Bild von {{.Title}}" />
+    <img class="image img-fluid" width="{{ $imageTiny.Width }}" height="{{ $imageTiny.Height }}" src="{{ $imageTiny.RelPermalink }}" alt="{{$altText}}" fetchpriority="high" />
   </picture>
   {{ end }}
   <div id="textcontent" class="order-md-1">
