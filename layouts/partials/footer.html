@@ -22,6 +22,18 @@
             }
         });
     </script>
-    <script src="/js/fuse.js"></script>
-    <script src="/js/search.js"></script>
+    {{- $fuse := resources.Get "js/fuse.js" }}
+    {{ $search := resources.Get "js/search.js" }}
+    {{ $fusesearchbar := slice $fuse $search | resources.Concat "js/fuse-searchbar.js" }}
+    {{$opts := dict
+            "minify" (cond hugo.IsDevelopment false true)
+    }}
+    {{ $fusesearchbar := $fusesearchbar | js.Build $opts }}
+    {{ if hugo.IsDevelopment }}
+    <script src="{{ $fusesearchbar.RelPermalink }}" defer></script>
+    {{ else }}
+        {{ with $fusesearchbar | fingerprint }}
+        <script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous" defer></script>
+        {{ end }}
+    {{ end }}
 </footer>

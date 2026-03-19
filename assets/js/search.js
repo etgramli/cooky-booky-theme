@@ -1,3 +1,4 @@
+import Fuse from 'fuse.js'
 var fuse;
 var list = document.getElementById('searchResults');
 var first = list.firstChild;
