@@ -108,9 +108,20 @@
     {{ end }}
     <link rel="stylesheet" href="{{ $style.RelPermalink }}" media="screen">
     
-    {{- $bootstrap := resources.Get "js/bootstrap.bundle.min.js" }}
-    {{ $js := slice $bootstrap | resources.Concat "js/bundle.js" | resources.Minify -}}
-    <script src="{{$js.RelPermalink}}" defer></script>
+    {{ with resources.Get "js/bootstrap.js" }}
+        {{$opts := dict
+            "minify" (cond hugo.IsDevelopment false true)
+        }}
+        {{ with . | js.Build $opts }}
+            {{ if hugo.IsDevelopment }}
+            <script src="{{ .RelPermalink }}" defer></script>
+            {{ else }}
+                {{ with . | fingerprint }}
+                <script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous" defer></script>
+                {{ end }}
+            {{ end }}
+        {{ end }}
+    {{ end }}
     <link rel="sitemap" type="application/xml" title="sitemap" href="/sitemap.xml">
 
     <!-- PWA thingies -->
