@@ -7,8 +7,14 @@
     <meta property="og:type" content="website" />
 
     {{- if eq .Section "recipe" }}<!-- Tags and open graph image for recipes -->
-    {{- $title := printf "%s | %s | Rezept | %s" .Title .Params.category .Site.Title }}
-    {{ $description := printf "Mit diesem Rezept lernst du wie du %s selber zubereiten kannst. Schaue hier bei %s vorbei und koche das Rezept einfach nach!" .Title .Site.Title -}}
+        <!-- .Params.category is NULL on category pages (i.e. Suppen, Salate, Saucen, ...) -->
+        {{- $title := printf "%s | Rezept | %s" .Title .Site.Title }}
+        {{- $numberOfRecipesFloor := math.Mul (math.Div (math.Sub (where .Site.RegularPages "Type" "recipe" | len) 1) 10) 10 }}
+        {{ $description := printf "Entdecke mehr als %d einfache und köstliche Rezepte bei %s. Finde hier das nächste Rezept zum nachkochen!" $numberOfRecipesFloor .Site.Title -}}
+        {{ if .Params.category }}
+            {{- $title = printf "%s | %s | Rezept | %s" .Title .Params.category .Site.Title }}
+            {{ $description = printf "Mit diesem Rezept lernst du wie du %s selber zubereiten kannst. Schaue hier bei %s vorbei und koche das Rezept einfach nach!" .Title .Site.Title -}}
+        {{ end }}
     <title>{{ $title }}</title>
     <meta property="og:title" content="{{ $title }}" />
     <meta name="description" content="{{ $description }}" />
