@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="{{ .Site.LanguageCode }}" data-theme="light">
-    {{- partial "head.html" . -}}
+    {{ block "head" . }}
+      {{ partial "head-default.html" . }}
+    {{ end }}
     <body>
         {{- partialCached "header.html" . -}}
         <div id="content">

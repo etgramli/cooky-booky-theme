@@ -1,3 +1,7 @@
+{{ define "head" }}
+  {{ partial "head-recipe.html" . }}
+{{ end }}
+
 {{ define "main" }}
 <div class="recipe justify-content-md-center">
   {{ $image := .Resources.Get (printf "%s.jpg" .Params.bigImageName) }}

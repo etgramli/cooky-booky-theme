@@ -6,15 +6,9 @@
     <meta property="og:url" content="{{ .Permalink }}" />
     <meta property="og:type" content="website" />
 
-    {{- if eq .Section "recipe" }}<!-- Tags and open graph image for recipes -->
-        <!-- .Params.category is NULL on category pages (i.e. Suppen, Salate, Saucen, ...) -->
-        {{- $title := printf "%s | Rezept | %s" .Title .Site.Title }}
-        {{- $numberOfRecipesFloor := math.Mul (math.Div (math.Sub (where .Site.RegularPages "Type" "recipe" | len) 1) 10) 10 }}
-        {{ $description := printf "Entdecke mehr als %d einfache und köstliche Rezepte bei %s. Finde hier das nächste Rezept zum nachkochen!" $numberOfRecipesFloor .Site.Title -}}
-        {{ if .Params.category }}
-            {{- $title = printf "%s | %s | Rezept | %s" .Title .Params.category .Site.Title }}
-            {{ $description = printf "Mit diesem Rezept lernst du wie du %s selber zubereiten kannst. Schaue hier bei %s vorbei und koche das Rezept einfach nach!" .Title .Site.Title -}}
-        {{ end }}
+    {{- $title := printf "%s | %s | Rezept | %s" .Title .Params.category .Site.Title -}}
+    {{- $description := printf "Mit diesem Rezept lernst du wie du %s selber zubereiten kannst. Schaue hier bei %s vorbei und koche das Rezept einfach nach!" .Title .Site.Title -}}
+
     <title>{{ $title }}</title>
     <meta property="og:title" content="{{ $title }}" />
     <meta name="description" content="{{ $description }}" />
@@ -24,15 +18,15 @@
     <meta name="keywords" content="Rezept, selbst kochen, lecker, {{ delimit .Keywords ", " }}"/>
     {{- end }}
 
-    {{- $imageName := printf "%s%s" .Params.bigImageName ".jpg"}}
-    {{- $image := .Resources.GetMatch $imageName }}
+    {{- $imageName := printf "%s%s" .Params.bigImageName ".jpg" -}}
+    {{- $image := .Resources.GetMatch $imageName -}}
     {{ if eq $image nil }}
         <meta property="og:image" content="{{ .Site.BaseURL }}/img/default-og-image.png" />
         <meta property="og:image:type" content="image/png" />
         <meta property="og:image:width" content="256" />
         <meta property="og:image:height" content="256" />
     {{ else }}
-        {{- $openGraphImage := $image.Fill (.Params.bigImageOrientation | printf "%s %s" "1200x672 webp" | printf "%s") }}
+        {{- $openGraphImage := $image.Fill (.Params.bigImageOrientation | printf "%s %s" "1200x672 webp" | printf "%s") -}}
         <meta property="og:image" content="{{ $openGraphImage.Permalink }}" />
         <meta property="og:image:type" content="{{ $openGraphImage.MediaType }}" />
         <meta property="og:image:width" content="{{ $openGraphImage.Width }}" />
@@ -80,20 +74,6 @@
         </script>
     {{ end }}
 
-    {{- else -}}<!-- and the logo and tags on any other page -->
-
-    <title>{{ .Title }} | {{ .Site.Title }}</title>
-    <meta property="og:title" content="{{ .Title }} | {{ .Site.Title }}" />
-    {{- $numberOfRecipesFloor := math.Mul (math.Div (math.Sub (where .Site.RegularPages "Type" "recipe" | len) 1) 10) 10 }}
-    {{ $description := printf "Entdecke mehr als %d einfache und köstliche Rezepte bei %s. Finde hier das nächste Rezept zum nachkochen!" $numberOfRecipesFloor .Site.Title -}}
-    <meta name="description" content="{{ $description }}" />
-    <meta property="og:description" content="{{ $description }}" />
-    <meta property="og:image" content="{{ .Site.BaseURL }}/img/default-og-image.png" />
-    <meta property="og:image:type" content="image/png" />
-    <meta property="og:image:width" content="256" />
-    <meta property="og:image:height" content="256" />
-    {{ end -}}
-
     <link rel='shortcut icon' type='image/svg' href='/img/CookyBookyLogoV1_Plate.svg' />
     <link rel='/apple-touch-icon' href='apple-touch-icon.png' />
 
@@ -105,7 +85,7 @@
         {{ $styleprint = $styleprint | toCSS  $optionsprint -}}
     {{ end }}
     <link rel="stylesheet" href="{{ $styleprint.RelPermalink }}" media="print">
-    {{- $options := (dict "targetPath" "css/styles.css" "outputStyle" "compressed") -}}
+    {{- $options := (dict "targetPath" "css/styles-common.css" "outputStyle" "compressed") -}}
     {{- $style := resources.Get "sass/main.scss" -}}
     {{- if ne hugo.Environment "development" -}}
         {{- $style = $style | toCSS  $options | postCSS | minify | fingerprint | resources.PostProcess -}}
@@ -113,7 +93,15 @@
         {{ $style = $style | toCSS  $options -}}
     {{ end }}
     <link rel="stylesheet" href="{{ $style.RelPermalink }}" media="screen">
-    
+    {{- $options := (dict "targetPath" "css/styles-recipe.css" "outputStyle" "compressed") -}}
+    {{- $styleRecipe := resources.Get "sass/styles-recipe.scss" -}}
+    {{- if ne hugo.Environment "development" -}}
+        {{- $styleRecipe = $styleRecipe | toCSS  $options | postCSS | minify | fingerprint | resources.PostProcess -}}
+    {{- else -}}
+        {{ $styleRecipe = $styleRecipe | toCSS  $options -}}
+    {{ end }}
+    <link rel="stylesheet" href="{{ $styleRecipe.RelPermalink }}" media="screen">
+
     {{ with resources.Get "js/bootstrap.js" }}
         {{$opts := dict
             "minify" (cond hugo.IsDevelopment false true)
