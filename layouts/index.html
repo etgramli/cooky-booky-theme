@@ -14,6 +14,7 @@
   <ul class="list-unstyled links">
     <li><a href="/alphabetic"><i class="bi bi-book"></i> Alphabetisch</a></li>
     <li><a href="/category"><i class="bi bi-columns-gap"></i> Kategorien</a></li>
+    <li><a href="/themen"><i class="bi bi-collection"></i> Nach Themen</a></li>
     <li><a href="/index.xml"><i class="bi bi-rss"></i> RSS</a></li>
     {{ if isset .Site.Params "emailaddress" }}<li><a href="mailto:{{ .Site.Params.Emailaddress }}"><i class="bi bi-envelope"></i> Mail schreiben</a></li>{{ end }}
     {{ with .GetPage "/tips" }}

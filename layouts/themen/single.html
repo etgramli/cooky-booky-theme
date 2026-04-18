@@ -1,0 +1,57 @@
+{{ define "head" }}
+  {{ partial "head-themen.html" . }}
+{{ end }}
+
+{{ define "main" }}
+<article class="themen-page">
+  <header class="themen-header">
+    <h1>{{ .Title }}</h1>
+  </header>
+  <section class="themen-content">
+    {{ .Content }}
+  </section>
+  {{ $pages := .Page.Params.recipes }}
+  {{ if eq (printf "%T" $pages) "string" }}
+    {{ $trim := trim $pages "\n\t '\" " }}
+    {{ $pages = slice $trim }}
+  {{ end }}
+  {{ if not $pages }}
+    <p>Keine Rezepte für den Carousel definiert.</p>
+  {{ else }}
+    <div class="themen-grid" aria-label="Recipe carousel">
+      {{ $ctx := . }}
+      {{ range $index, $p := $pages }}
+        {{ $page := $ctx.Page.Site.GetPage $p }}
+        {{ if not $page }}
+          {{ $page = $ctx.Page.Site.GetPage (printf "%s" $p | absURL) }}
+        {{ end }}
+        {{ if not $page }}
+          <div class="recipe-card">
+            <div class="card-body"><strong>Rezept nicht gefunden:</strong> {{ $p }}</div>
+          </div>
+        {{ else }}
+          <a class="text-reset text-decoration-none" href="{{ $page.RelPermalink }}" aria-label="{{ $page.Title }}">
+            <div class="thema-tile">
+              <div class="thema-image-wrapper card-img-top">
+          {{ $image := $page.Resources.Get (printf "%s.jpg" $page.Params.bigImageName) }}
+            {{ if $image }}
+              {{ $altText := $page.Title | printf "Bild von %s" }}
+              {{ with $image.Exif }}{{ with .Tags.UserComment }}{{ $altText = . }}{{ end }}{{ end }}
+              {{- $imageTiny := $image.Fill ($page.Params.bigImageOrientation | printf "%s %s" "430x242 webp" | printf "%s") -}}
+              <img class="image img-fluid" width="{{ $imageTiny.Width }}" height="{{ $imageTiny.Height }}" src="{{ $imageTiny.RelPermalink }}" alt="{{$altText}}" fetchpriority="high" />
+            {{ else }}
+              {{ $altText := printf "CookyBooky Logo als Platzhalterbild für %s" $page.Title }}
+              <img class="image img-fluid thema-image-fallback" width="430" height="242" src="/img/CookyBookyLogoV1_Plate.svg" alt="{{ $altText }}" />
+            {{ end }}
+            </div>
+            <div class="card-body">
+              <h2 class="h5 card-title mb-0">{{ $page.Title }}</h2>
+            </div>
+          </div>
+        </a>
+        {{ end }}
+      {{ end }}
+    </div>
+  {{ end }}
+</article>
+{{ end }}

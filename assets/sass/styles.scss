@@ -55,6 +55,9 @@
   background-color: var(--color-bg);
   color: var(--color-text);
 }
+img {
+    filter: #{"grayscale(var(--image-grayscale)) brightness(var(--image-brightness))"};
+}
 
 div.mainContainer {
   text-align: center;

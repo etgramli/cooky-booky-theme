@@ -7,7 +7,6 @@ div.recipe {
     width: 100%;
     max-height: 24em;
     object-fit: cover;
-    filter: #{"grayscale(var(--image-grayscale)) brightness(var(--image-brightness))"};
   }
   #textcontent {
     display: block;

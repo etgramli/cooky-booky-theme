@@ -1,0 +1,141 @@
+.themen-grid-page {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  h1 {
+    text-align: center;
+    width: 100%;
+  }
+}
+
+.themen-grid {
+  --recipe-tile-width: 18em;
+  padding: 0 2em;
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(auto-fill, var(--recipe-tile-width));
+  justify-content: center;
+  gap: 2em;
+  article {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.thema-tile {
+  display: flex;
+  width: var(--recipe-tile-width);
+  aspect-ratio: 1.35;
+  flex-direction: column;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .08);
+  transition: transform .2s ease, box-shadow .2s ease;
+  background: transparent;
+  a {
+    color: inherit;
+    text-decoration: none;
+    display: block;
+  }
+}
+
+.thema-tile:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, .15);
+}
+
+.thema-image-wrapper {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
+  background: #f8f8f8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .no-image-text {
+    height:180px;
+    display:grid;
+    place-items:center;
+  }
+}
+
+.thema-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  display: block;
+}
+
+.thema-image-wrapper .thema-image-fallback {
+  width: auto;
+  max-width: 85%;
+  max-height: 85%;
+  object-fit: contain;
+  object-position: center center;
+}
+
+.thema-image-placeholder {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  font-size: 1.2rem;
+  color: #777;
+  background: #ededed;
+}
+
+.thema-count {
+  position: absolute;
+  right: 0.5rem;
+  top: 0.5rem;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  border-radius: 999px;
+  margin: 0;
+  padding: 0.35rem 0.8rem;
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+
+.thema-tile h2 {
+  margin: 0;
+  padding: 0.8rem;
+  font-size: 1.05rem;
+  line-height: 1.3;
+}
+
+.themen-page {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1rem;
+
+  .themen-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    h1 {
+      line-height: 1.1;
+      margin-bottom: 0;
+    }
+  }
+
+  .themen-content {
+    max-width: 100%;
+    margin: 0 auto;
+    p {
+      margin: 1em 8em;
+    }
+  }
+}

@@ -1,0 +1,44 @@
+{{ define "head" }}
+  {{ partial "head-themen.html" . }}
+{{ end }}
+
+{{ define "main" }}
+<main class="themen-grid-page">
+  <h1>{{ .Title }}</h1>
+  <div class="themen-grid">
+  {{ range sort .Pages "Title" }}
+    {{ $recipeCount := 0 }}
+    {{ with .Params.recipes }}
+      {{ $recipeCount = len . }}
+    {{ end }}
+    {{ $image := "" }}
+    {{ with .Params.recipes }}
+      {{ $first := index . 0 }}
+      {{ with $.Site.GetPage $first }}
+        {{ with .Resources.Get (printf "%s.jpg" .Params.bigImageName) }}
+          {{ $image = . }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+    <a class="text-reset text-decoration-none" href="{{ .RelPermalink }}">
+      <div class="thema-tile">
+        <div class="thema-image-wrapper card-img-top">
+          {{ if $image }}
+            {{ $altText := .Title | printf "Bild von %s" }}
+            {{ with $image.Exif }}{{ with .Tags.UserComment }}{{ $altText = . }}{{ end }}{{ end }}
+            {{- $imageTiny := $image.Fill (.Params.bigImageOrientation | printf "%s %s" "430x242 webp" | printf "%s") -}}
+            <img class="image img-fluid" width="{{ $imageTiny.Width }}" height="{{ $imageTiny.Height }}" src="{{ $imageTiny.RelPermalink }}" alt="{{$altText}}" fetchpriority="high" />
+          {{ else }}
+            <div class="thema-image-placeholder">{{ .Title | plainify | truncate 24 }}</div>
+          {{ end }}
+          <span class="thema-count">{{ $recipeCount }} Rezept{{ if ne $recipeCount 1 }}e{{ end }}</span>
+        </div>
+        <div class="card-body">
+          <h2 class="h5 card-title mb-0">{{ .Title }}</h2>
+        </div>
+      </div>
+    </a>
+  {{ end }}
+  </div>
+</main>
+{{ end }}
