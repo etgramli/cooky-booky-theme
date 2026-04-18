@@ -17,6 +17,19 @@ fetchJSONFile('/index.json', function(data){
     fuse = new Fuse(data, options); // build the index from the json file
   });
 document.addEventListener('keydown', function(event) {
+  if (event.key === '/' && !event.altKey && !event.ctrlKey && !event.metaKey) {
+    var active = document.activeElement;
+    if (active && (active.tagName === 'INPUT' || active.tagName === 'TEXTAREA' || active.isContentEditable)) {
+      return;
+    }
+    var searchInput = document.getElementById('searchInput');
+    if (searchInput) {
+      event.preventDefault();
+      searchInput.focus();
+    }
+    return;
+  }
+
   if (event.keyCode == 40) {  // DOWN (40) arrow
     if (resultsAvailable) {
       console.log("down");
