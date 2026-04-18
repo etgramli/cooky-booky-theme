@@ -1,6 +1,10 @@
-let diceclasses = Array('bi-dice-1', 'bi-dice-2', 'bi-dice-3', 'bi-dice-4', 'bi-dice-5', 'bi-dice-6');
-let diceclass = diceclasses[Math.floor(Math.random()*diceclasses.length)];
-document.getElementById("randomRecipeButtonIcon").classList.add(diceclass);
+const diceVariants = ['dice-1', 'dice-2', 'dice-3', 'dice-4', 'dice-5', 'dice-6'];
+const diceIndex = Math.floor(Math.random() * (diceVariants.length * 2)) % diceVariants.length;
+const diceVariant = diceVariants[diceIndex];
+const randomRecipeButtonIconUse = document.querySelector('#randomRecipeButtonIcon use');
+if (randomRecipeButtonIconUse) {
+    randomRecipeButtonIconUse.setAttribute('href', `#${diceVariant}`);
+}
 {{ $recipes := shuffle (where .Site.RegularPages "Type" "recipe") }}
 {{ if gt (len $recipes) 0 }}
 let links = [
@@ -15,6 +19,6 @@ var recipeIndex = links.indexOf('/recipe/' + window.location.pathname.split('/')
 if (recipeIndex === -1) {
     recipeIndex = Math.floor(Math.random() * (links.length - 1));
 } else {
-    recipeIndex = (recipeIndex + 1) % (links.length - 1);
+    recipeIndex = (recipeIndex + 1) % links.length;
 }
 document.getElementById("randomRecipeButton").onclick = function () {location.href = links[recipeIndex];};

@@ -10,15 +10,37 @@
   </div>
   <h2>Rezept des Tages</h2>
   <a id="rdt"></a>
+  <svg aria-hidden="true" style="display:none">
+      <symbol id="book" viewBox="0 0 16 16">
+        <path d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783"/>
+      </symbol>
+      <symbol id="columns-gap" viewBox="0 0 16 16">
+        <path d="M6 1v3H1V1zM1 0a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1zm14 12v3h-5v-3zm-5-1a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1zM6 8v7H1V8zM1 7a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1zm14-6v7h-5V1zm-5-1a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1z"/>
+      </symbol>
+      <symbol id="collection" viewBox="0 0 16 16">
+        <path d="M2.5 3.5a.5.5 0 0 1 0-1h11a.5.5 0 0 1 0 1zm2-2a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1zM0 13a1.5 1.5 0 0 0 1.5 1.5h13A1.5 1.5 0 0 0 16 13V6a1.5 1.5 0 0 0-1.5-1.5h-13A1.5 1.5 0 0 0 0 6zm1.5.5A.5.5 0 0 1 1 13V6a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5z"/>
+      </symbol>
+      <symbol id="rss" viewBox="0 0 16 16">
+        <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
+        <path d="M5.5 12a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m-3-8.5a1 1 0 0 1 1-1c5.523 0 10 4.477 10 10a1 1 0 1 1-2 0 8 8 0 0 0-8-8 1 1 0 0 1-1-1m0 4a1 1 0 0 1 1-1 6 6 0 0 1 6 6 1 1 0 1 1-2 0 4 4 0 0 0-4-4 1 1 0 0 1-1-1"/>
+      </symbol>
+      <symbol id="envelope" viewBox="0 0 16 16">
+        <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1zm13 2.383-4.708 2.825L15 11.105zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741M1 11.105l4.708-2.897L1 5.383z"/>
+      </symbol>
+      <symbol id="exclamation-circle" viewBox="0 0 16 16">
+        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+        <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0M7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0z"/>
+      </symbol>
+    </svg>
   <h2>Links</h2>
   <ul class="list-unstyled links">
-    <li><a href="/alphabetic"><i class="bi bi-book"></i> Alphabetisch</a></li>
-    <li><a href="/category"><i class="bi bi-columns-gap"></i> Kategorien</a></li>
-    <li><a href="/themen"><i class="bi bi-collection"></i> Nach Themen</a></li>
-    <li><a href="/index.xml"><i class="bi bi-rss"></i> RSS</a></li>
-    {{ if isset .Site.Params "emailaddress" }}<li><a href="mailto:{{ .Site.Params.Emailaddress }}"><i class="bi bi-envelope"></i> Mail schreiben</a></li>{{ end }}
+    <li><a href="/alphabetic"><svg class="svgIcon" viewBox="0 0 16 16" aria-hidden="true"><use href="#book"></use></svg>Alphabetisch</a></li>
+    <li><a href="/category"><svg class="svgIcon" viewBox="0 0 16 16" aria-hidden="true"><use href="#columns-gap"></use></svg>Kategorien</a></li>
+    <li><a href="/themen"><svg class="svgIcon" viewBox="0 0 16 16" aria-hidden="true"><use href="#collection"></use></svg>Nach Themen</a></li>
+    <li><a href="/index.xml"><svg class="svgIcon" viewBox="0 0 16 16" aria-hidden="true"><use href="#rss"></use></svg>RSS</a></li>
+    {{ if isset .Site.Params "emailaddress" }}<li><a href="mailto:{{ .Site.Params.Emailaddress }}"><svg class="svgIcon" viewBox="0 0 16 16" aria-hidden="true"><use href="#envelope"></use></svg>Mail schreiben</a></li>{{ end }}
     {{ with .GetPage "/tips" }}
-    <li><a href="/tips"><i class="bi bi-exclamation-circle"></i> Tips</a></li>
+    <li><a href="/tips"><svg class="svgIcon" viewBox="0 0 16 16" aria-hidden="true"><use href="#exclamation-circle"></use></svg>Tips</a></li>
     {{ end }}
   </ul>
   {{ $todos := sort (where (where .Site.RegularPages "Type" "recipe") "Params.bigImageName" "eq" nil) ".Params.id" }}

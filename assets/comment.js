@@ -39,16 +39,11 @@ function queryNumberOfRatings() {
           if (averageRatingRequest.readyState === 4) {
             if (averageRatingRequest.status === 200) {
               const averageRating = parseInt(JSON.parse(averageRatingRequest.responseText));
-              const children = starContainer.children;
-              for (let i = 0; i < children.length && i < averageRating; ++i) {
-                const classes = children[i].classList;
-                if (i < averageRating) {
-                  classes.add('bi-star-fill');
-                  classes.remove('bi-star');
-                } else {
-                  classes.add('bi-star');
-                  classes.remove('bi-star-fill');
-                }
+              const stars = starContainer.querySelectorAll('.ratingStar');
+              for (let i = 0; i < stars.length; ++i) {
+                const useElement = stars[i].querySelector('use');
+                if (!useElement) continue;
+                useElement.setAttribute('href', i < averageRating ? '#star-full' : '#star-empty');
               }
               starContainer.style.removeProperty('display');
             } else {
@@ -68,7 +63,11 @@ function queryNumberOfRatings() {
 
 function registerStarContainer() {
   document.getElementById('rating-star-container').addEventListener('click', (e) => {
-    const rating = parseInt(e.target.id.substring(e.target.id.length - 1));
+    const star = e.target.closest('.ratingStar');
+    if (!star || !star.id.startsWith('star-')) {
+      return;
+    }
+    const rating = parseInt(star.id.substring(star.id.length - 1));
     if (Number.isInteger(rating)) {
       const postRatingRequest = new XMLHttpRequest();
       postRatingRequest.open("POST", "{{ .Site.Params.Backend_url }}/rating/" + getRecipeId(), true);

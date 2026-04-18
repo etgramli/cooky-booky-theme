@@ -121,6 +121,24 @@ a:visited {
 .actionButtonIcon {
   margin: auto;
   display: block !important;
+  width: 1.25em;
+  height: 1.25em;
+  fill: currentColor;
+}
+
+.ratingStar {
+  display: inline-block !important;
+  vertical-align: middle;
+  width: .85em;
+  height: .85em;
+}
+
+.svgIcon {
+  width: 1em;
+  height: 1em;
+  margin-right: 0.35em;
+  //vertical-align: baseline;
+  fill: currentColor;
 }
 
 h1 {
