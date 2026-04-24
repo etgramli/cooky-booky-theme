@@ -12,9 +12,11 @@
       {{ $recipeCount = len . }}
     {{ end }}
     {{ $image := "" }}
+    {{ $imageOrientation := "" }}
     {{ with .Params.recipes }}
       {{ $first := index . 0 }}
       {{ with $.Site.GetPage $first }}
+        {{ $imageOrientation = .Params.bigImageOrientation }}
         {{ with .Resources.Get (printf "%s.jpg" .Params.bigImageName) }}
           {{ $image = . }}
         {{ end }}
@@ -26,7 +28,7 @@
           {{ if $image }}
             {{ $altText := .Title | printf "Bild von %s" }}
             {{ with $image.Exif }}{{ with .Tags.UserComment }}{{ $altText = . }}{{ end }}{{ end }}
-            {{- $imageTiny := $image.Fill (.Params.bigImageOrientation | printf "%s %s" "430x242 webp" | printf "%s") -}}
+            {{- $imageTiny := $image.Fill ($imageOrientation | printf "%s %s" "430x242 webp" | printf "%s") -}}
             <img class="image img-fluid" width="{{ $imageTiny.Width }}" height="{{ $imageTiny.Height }}" src="{{ $imageTiny.RelPermalink }}" alt="{{$altText}}" fetchpriority="high" />
           {{ else }}
             <div class="thema-image-placeholder">{{ .Title | plainify | truncate 24 }}</div>
