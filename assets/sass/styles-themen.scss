@@ -1,7 +1,7 @@
 .themen-grid-page {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 1rem;
+  padding: 1em;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -14,7 +14,7 @@
 
 .themen-grid {
   --recipe-tile-width: 18em;
-  padding: 0 2em;
+  padding: 0 1em;
   display: grid;
   width: 100%;
   grid-template-columns: repeat(auto-fill, var(--recipe-tile-width));
@@ -79,16 +79,6 @@
   max-height: 85%;
   object-fit: contain;
   object-position: center center;
-}
-
-.thema-image-placeholder {
-  width: 100%;
-  height: 100%;
-  display: grid;
-  place-items: center;
-  font-size: 1.2rem;
-  color: #777;
-  background: #ededed;
 }
 
 .thema-count {
