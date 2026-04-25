@@ -111,12 +111,23 @@ a:visited {
 #shareButton {
   z-index: 998;
   bottom: 1.75em;
-  right: 6em;
+  right: 10.25em;
 }
 @media (any-pointer: fine) {
   #shareButton {
     visibility: hidden;
   }
+}
+#toTopButton {
+  z-index: 99;
+  bottom: 1.75em;
+  left: 1.75em;
+  display: none; /* Only display when scrolled down on list pages */
+}
+#theme-toggle-boutton {
+  z-index: 998;
+  bottom: 1.75em;
+  right: 6em;
 }
 .actionButtonIcon {
   margin: auto;
@@ -205,19 +216,6 @@ div.recipeListContainer {
 #switch-keep-on-container {
   margin-left: 2em;
   margin-right: 2em;
-}
-
-#toTopButton {
-  z-index: 99;
-  bottom: 1.75em;
-  left: 1.75em;
-  display: none; /* Hidden by default */
-}
-
-#theme-toggle-boutton {
-  width: 2.5em;
-  height: 2.5em;
-  background-color: var(--color-button);
 }
 
 div.tips {
