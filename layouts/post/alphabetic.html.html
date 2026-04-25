@@ -5,20 +5,31 @@
 {{ define "main" }}
 <div class="alphabeticalList">
   <h1>Alphabetisch</h1>
-  <!-- 1. Create map -->
+  <!-- 1. Create separate maps for recipes and index entries -->
    {{- $scratch := newScratch -}}
-   {{- $allMapName := "mapName" -}}
+   {{- $recipeMap := "recipeMap" -}}
+   {{- $indexMap := "indexMap" -}}
   <!-- 2. Add all recipes -->
   {{- range (where .Site.RegularPages "Type" "recipe") -}}
-    {{ $scratch.SetInMap $allMapName .Title (slice . ) }}
+    {{- $scratch.SetInMap $recipeMap .Title (slice .) -}}
   {{- end -}}
-  <!-- 3. Add all index terms --> <!-- THERE MAY BE DUPLICATES !!! -->
+  <!-- 3. Add all index terms -->
   {{- range $taxo, $terms := .Site.Taxonomies.index -}}
-    {{ $scratch.SetInMap $allMapName (strings.FirstUpper $taxo) $terms }}
+    {{- $scratch.SetInMap $indexMap (strings.FirstUpper $taxo) $terms -}}
   {{- end -}}
   <div id="letters">
-    {{ $keys := slice }}
-    {{- range $k, $v := $scratch.Get $allMapName }}{{ $keys = append $k $keys }}{{- end -}}
+    {{- $keys := slice "" -}}
+    {{- range $k, $v := $scratch.Get $recipeMap -}}
+      {{- if not (in $keys $k) -}}
+        {{- $keys = $keys | append $k -}}
+      {{- end -}}
+    {{- end -}}
+    {{- range $k, $v := $scratch.Get $indexMap -}}
+      {{- if not (in $keys $k) -}}
+        {{- $keys = $keys | append $k -}}
+      {{- end -}}
+    {{- end -}}
+    {{- $keys = after 0 $keys -}}
     {{- $keys = sort $keys -}}
     {{- $data := newScratch -}}
     {{- $data.Set "oldletter" "" -}}
@@ -39,24 +50,33 @@
       <h3 id="{{ $data.Get "startletter" }}">{{ $data.Get "startletter" }}</h3>
       {{- $data.Set "oldletter" ($data.Get "startletter") -}}
     {{- end -}}
-    {{- $values := index ($scratch.Get $allMapName) . -}}
-    {{- with $values -}}
-      {{ if eq (len $values) 1}}{{/* Single recipe */}}
-        {{ if eq (printf "%T" $values) "page.WeightedPages" }}{{/* Single recipes in category (alias i.e. Pommes->Fish'n'Chips) */}}
-          {{- range $values -}}
-            <div class="rlink"><a href="{{ .Page.Permalink }}">{{ $values.Page.Title }} ({{ .Page.Title }})</a></div>
-          {{- end -}}
-        {{- else -}}{{/* Title from recipe */}}
-          {{- range $values -}}
-            <div class="rlink"><a href="{{ .Permalink }}">{{ .Title }}</a></div>
-          {{- end -}}
+    {{- $recipeValues := index ($scratch.Get $recipeMap) . -}}
+    {{- $indexValues := index ($scratch.Get $indexMap) . -}}
+    {{- if $recipeValues -}}
+      {{- range $recipeValues -}}
+        <div class="rlink"><a href="{{ .Permalink }}">{{ .Title }}</a></div>
+      {{- end -}}
+      {{- if $indexValues -}}
+        {{- $related := where $indexValues "Title" "ne" . -}}
+        {{- if gt (len $related) 0 -}}
+          <ul>
+            {{- range sort $related "Title" -}}
+              <li><a class="index-entry" href="{{ .Permalink }}">{{ .Title }}</a></li>
+            {{- end -}}
+          </ul>
         {{- end -}}
-      {{- else -}}{{/* Multiple recipes in category */}}
-        {{ $values.Page.Title }}
+      {{- end -}}
+    {{- else if $indexValues -}}
+      {{- if eq (len $indexValues) 1 -}}
+        {{- range $indexValues -}}
+          <div class="rlink"><a href="{{ .Permalink }}">{{ .Title }}</a></div>
+        {{- end -}}
+      {{- else -}}
+        <div class="rlink">{{ . }}</div>
         <ul>
-          {{ range sort $values "Title" -}}
-          <li><a class="index-entry" href="{{ .Permalink }}">{{ .Title }}</a></li>
-          {{ end -}}
+          {{- range sort $indexValues "Title" -}}
+            <li><a class="index-entry" href="{{ .Permalink }}">{{ .Title }}</a></li>
+          {{- end -}}
         </ul>
       {{- end -}}
     {{- end -}}
@@ -65,7 +85,7 @@
   <button class="rounded-circle boutton" onclick="scrollToTop()" id="toTopButton" title="Go to top">
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-up-fill" viewBox="0 0 16 16">
       <path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"/>
-</svg>
+    </svg>
   </button>
   <script src="/js/scrollbutton.js" defer></script>
 </div>
