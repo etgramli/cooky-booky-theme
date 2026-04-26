@@ -1,5 +1,6 @@
 RewriteEngine on
 ErrorDocument 404 /404.html
+IndexOptions +Charset=UTF-8
 <IfModule mod_deflate.c>
 AddOutputFilterByType DEFLATE text/plain
 AddOutputFilterByType DEFLATE text/html
