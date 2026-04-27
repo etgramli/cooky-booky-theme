@@ -101,8 +101,12 @@ function putComment() {
         document.getElementById("comment-form").reset();
         queryNumberOfComments();
       } else if (postRatingRequest.status == 400) {
-        document.getElementById("popup-invalid-char").classList.toggle("show");
-        window.setTimeout(() => {document.getElementById("popup-invalid-char").classList.toggle("show");}, 5000);
+        const popup = document.getElementById("popup-invalid-char");
+        if (popup) {
+          popup.textContent = JSON.parse(postRatingRequest.responseText).message || "Ungültige Eingabe";
+          popup.classList.toggle("show");
+          window.setTimeout(() => {popup.classList.toggle("show");}, 5000);
+        }
       } else if (postRatingRequest.status == 403) {
         document.getElementById("popup-already-commented").classList.toggle("show");
         window.setTimeout(() => {document.getElementById("popup-already-commented").classList.toggle("show");}, 5000);
