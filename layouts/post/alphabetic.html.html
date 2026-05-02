@@ -52,7 +52,12 @@
           {{- end -}}
         {{- end -}}
       {{- else -}}{{/* Multiple recipes in category */}}
-        {{ $values.Page.Title }}
+        {{ $indexPage := site.GetPage (printf "%s" (strings.ToLower $values.Page.Title)) }}
+        {{ if $indexPage }}
+          <div class="rlink"><a href="{{ $indexPage.Permalink }}">{{ $indexPage.Title }}</a></div>
+        {{ else }}
+          {{ $values.Page.Title }}
+        {{ end }}
         <ul>
           {{ range sort $values "Title" -}}
           <li><a class="index-entry" href="{{ .Permalink }}">{{ .Title }}</a></li>
