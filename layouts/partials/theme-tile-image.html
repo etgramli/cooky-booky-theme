@@ -8,8 +8,12 @@
 {{ if $image }}
   {{ $altText := .Title | printf "Bild von %s" }}
   {{ with $image.Exif }}{{ with .Tags.UserComment }}{{ $altText = . }}{{ end }}{{ end }}
-  {{- $imageTiny := $image.Fill ($imageOrientation | printf "%s %s" "430x242 webp" | printf "%s") -}}
-    <img class="image img-fluid" width="{{ $imageTiny.Width }}" height="{{ $imageTiny.Height }}" src="{{ $imageTiny.RelPermalink }}" alt="{{$altText}}" fetchpriority="high" />
+  {{- $imageBg := $image.Fill ($imageOrientation | printf "%s %s" "430x242 webp" | printf "%s") -}}
+  {{- $imageTiny := $image.Fill ($imageOrientation | printf "%s %s" "288x162 webp" | printf "%s") -}}
+    <picture>
+      <source media="(min-width:430px)" width="{{ $imageBg.Width }}" height="{{ $imageBg.Height }}" srcset="{{ $imageBg.RelPermalink }}" >
+      <img class="image img-fluid" width="{{ $imageTiny.Width }}" height="{{ $imageTiny.Height }}" src="{{ $imageTiny.RelPermalink }}" alt="{{$altText}}" fetchpriority="high" />
+    </picture>
 {{ else }}
     {{ $altText := printf "CookyBooky Logo als Platzhalterbild für %s" .Title }}
     <img class="image img-fluid thema-image-fallback" width="430" height="242" src="/img/CookyBookyLogoV1_Plate.svg" alt="{{ $altText }}" />
