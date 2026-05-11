@@ -27,6 +27,7 @@
 
     <link rel='shortcut icon' type='image/svg' href='/img/CookyBookyLogoV1_Plate.svg' />
     <link rel='apple-touch-icon' href='/apple-touch-icon.png' />
+    <link rel="preload" as="font" type="font/woff2" href="/font/AmaticSC-Bold.woff2">
 
     {{- $optionsprint := (dict "targetPath" "css/styles-print.css" "outputStyle" "compressed") -}}
     {{- $styleprint := resources.Get "sass/main-print.scss" -}}
