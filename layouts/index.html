@@ -39,8 +39,8 @@
     <li><a href="/themen"><svg class="svgIcon" viewBox="0 0 16 16" aria-hidden="true"><use href="#collection"></use></svg>Nach Themen</a></li>
     <li><a href="/index.xml"><svg class="svgIcon" viewBox="0 0 16 16" aria-hidden="true"><use href="#rss"></use></svg>RSS</a></li>
     {{ if isset .Site.Params "emailaddress" }}<li><a href="mailto:{{ .Site.Params.Emailaddress }}"><svg class="svgIcon" viewBox="0 0 16 16" aria-hidden="true"><use href="#envelope"></use></svg>Mail schreiben</a></li>{{ end }}
-    {{ with .GetPage "/tips" }}
-    <li><a href="/tips"><svg class="svgIcon" viewBox="0 0 16 16" aria-hidden="true"><use href="#exclamation-circle"></use></svg>Tips</a></li>
+    {{ with .GetPage "/tipps" }}
+    <li><a href="/tipps"><svg class="svgIcon" viewBox="0 0 16 16" aria-hidden="true"><use href="#exclamation-circle"></use></svg>Tipps</a></li>
     {{ end }}
   </ul>
   {{ $todos := sort (where (where .Site.RegularPages "Type" "recipe") "Params.bigImageName" "eq" nil) ".Params.id" }}
