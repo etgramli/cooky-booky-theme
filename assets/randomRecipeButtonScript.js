@@ -19,6 +19,6 @@ var recipeIndex = links.indexOf('/recipe/' + window.location.pathname.split('/')
 if (recipeIndex === -1) {
     recipeIndex = Math.floor(Math.random() * (links.length - 1));
 } else {
-    recipeIndex = (recipeIndex + 1) % links.length;
+    recipeIndex = (recipeIndex + 1) % (links.length - 1);
 }
 document.getElementById("randomRecipeButton").onclick = function () {location.href = links[recipeIndex];};
