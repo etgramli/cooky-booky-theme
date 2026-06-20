@@ -8,17 +8,19 @@ if (randomRecipeButtonIconUse) {
 {{ $recipes := shuffle (where .Site.RegularPages "Type" "recipe") }}
 {{ if gt (len $recipes) 0 }}
 let links = [
-{{- range $recipes -}}
-'{{- .RelPermalink -}}',
+{{- range $i, $recipe := $recipes -}}
+{{- if $i }},{{ end -}}
+'{{- $recipe.RelPermalink -}}'
 {{- end -}}
-""];
+];
 {{ else }}
 let links = ["404.html"];
+document.getElementById("randomRecipeButton").style.display = 'none';
 {{- end -}}
 var recipeIndex = links.indexOf('/recipe/' + window.location.pathname.split('/').at(-2) + '/');
 if (recipeIndex === -1) {
     recipeIndex = Math.floor(Math.random() * (links.length - 1));
 } else {
-    recipeIndex = (recipeIndex + 1) % (links.length - 1);
+    recipeIndex = (recipeIndex + 1) % links.length;
 }
 document.getElementById("randomRecipeButton").onclick = function () {location.href = links[recipeIndex];};
