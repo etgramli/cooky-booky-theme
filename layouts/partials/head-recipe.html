@@ -61,10 +61,10 @@
             {{- end }}
             "keywords": "{{ delimit .Keywords ", " }}",
             {{- if isset .Params "schema_ingredients" }}
-            "recipeIngredient": {{ .Params.schema_ingredients | jsonify }},
+            "recipeIngredient": {{ .Params.schema_ingredients }},
             {{- end }}
             {{- if isset .Params "schema_steps" }}
-            "recipeInstructions": {{ .Params.schema_steps | jsonify }},
+            "recipeInstructions": {{ .Params.schema_steps }},
             {{- end }}
             "author": {
                 "@type": "Person",
