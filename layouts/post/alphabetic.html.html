@@ -52,7 +52,9 @@
           {{- end -}}
         {{- end -}}
       {{- else -}}{{/* Multiple recipes in category */}}
-        {{ $indexPage := site.GetPage (printf "%s" (strings.ToLower $values.Page.Title)) }}
+        {{/* GetPage is ambiguous in Hugo >= 0.153 (recipe vs. index term), so match recipes by title */}}
+        {{ $indexPage := "" }}
+        {{ range first 1 (where (where site.RegularPages "Type" "recipe") "Title" "eq" $values.Page.Title) }}{{ $indexPage = . }}{{ end }}
         {{ if $indexPage }}
           <div class="rlink"><a href="{{ $indexPage.Permalink }}">{{ $indexPage.Title }}</a></div>
         {{ else }}
